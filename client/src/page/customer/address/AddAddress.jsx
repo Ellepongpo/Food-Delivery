@@ -20,7 +20,7 @@ const AddAddress = () => {
         setForm({
             ...form, [e.target.name]: e.target.value
         })
-        console.log(form)
+        //console.log(form)
 
     }
 
@@ -29,11 +29,11 @@ const AddAddress = () => {
 
         try {
             const res = await axios.post('http://localhost:3000/api/addAddress', form)
-            console.log(res.data)
+            //console.log(res.data)
             toast.success(res.data.message)
         }catch(err){
             toast.error(err.response.data.message)
-            //console.log(err)
+            console.log(err)
         }
         
     }
@@ -41,7 +41,7 @@ const AddAddress = () => {
     return (
         <div className="w-full h-full">
             <div className="text-center pt-16 text-xl font-bold">
-                Add Address
+                เพิ่มที่อยู่จัดส่ง
             </div>
 
             <div className="flex justify-center">

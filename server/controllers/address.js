@@ -88,3 +88,25 @@ export const defaultAddress = async (req, res) => {
         res.status(500).json({ message: "server error" })
     }
 }
+
+//edit address
+export const editAddress = async (req , res) => {
+    const {address_id,house_no,sub_district,district,province,zip_code,phone} = req.body
+    try{
+        //update address_delivery
+        await db.query(
+            `
+            update Address_Delivery
+            set
+                edit_dateTime = now() , house_no = ? ,
+                sub_district = ? , district = ? ,
+                province = ? , zip_code = ? , phone = ?
+            where address_id = ?
+            `,[house_no, sub_district, district, province, zip_code, phone, address_id]
+        )
+
+        res.status(200).json({message: "แก้ไขที่อยู่จัดส่งเรียบร้อย"})
+    }catch(err){
+        res.status(500).json({message: "server error"})
+    }
+}

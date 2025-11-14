@@ -23,6 +23,10 @@ const Accessories = () => {
     }
   }
 
+  const editAccessories = (accessories) => {
+    navigate('/employee/editAccessories' , {state : {accessories}})
+  }
+
 
   return (
     <div className="min-h-full bg-white flex flex-col items-center py-16 p-16">
@@ -50,7 +54,7 @@ const Accessories = () => {
                   <td className="p-6">{item.stock_qty_accessories}</td>
                   <td className="p-6">
                     <button className="bg-blue-600 px-6 py-1 mr-2 ml-2 text-white rounded-md cursor-pointer" 
-                      onClick={()=>navigate('/employee/editAccessories')}>
+                      onClick={()=> editAccessories(item)}>
                       <Pencil className="size-6"/>
                     </button>
                   </td>

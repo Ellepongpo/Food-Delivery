@@ -1,12 +1,13 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useDeliveryStore from "../../../store/Customer-store"
-import { MapPinned } from 'lucide-react';
+import { MapPinned, Pencil, Trash2, CirclePlus } from 'lucide-react';
 
 const Address = () => {
-  const customer = useDeliveryStore((state) => state.customer)
+  const customer_id = useDeliveryStore((state) => state.customer.id)
   const [address, setAddress] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     hdlFetchAddress()
@@ -14,12 +15,16 @@ const Address = () => {
 
   const hdlFetchAddress = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/api/address', { customer_id: customer.id })
-      console.log(res.data.address)
+      const res = await axios.post('http://localhost:3000/api/address', { customer_id: customer_id })
+      //console.log(res.data.address)
       setAddress(res.data.address)
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const editAddress = (address) =>{
+    navigate('/customer/profile/editAddress', {state: {address}})
   }
 
   return (
@@ -33,8 +38,9 @@ const Address = () => {
         <div>
           <Link to='/customer/profile/addAddress'>
             <button className="border px-8 py-2 bg-blue-500 text-white rounded-md
-            hover:bg-blue-700 cursor-pointer">
-              เพิ่มที่อยู่
+            hover:bg-blue-700 cursor-pointer flex">
+              <CirclePlus className="mr-4" />
+              <span>เพิ่มที่อยู่</span>
             </button>
           </Link>
         </div>
@@ -71,15 +77,14 @@ const Address = () => {
               </div>
 
               <div className="w-52 flex items-center justify-center">
-                <Link to='/customer/profile/editAddress'>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 mr-2 rounded-md cursor-pointer">
-                    edit
-                  </button>
-                </Link>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 mr-2 rounded-md cursor-pointer"
+                  onClick={()=> editAddress(item)}>
+                  <Pencil />
+                </button>
 
                 <Link>
-                  <button className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md cursor-pointer">
-                    delete
+                  <button className="bg-red-500 hover:bg-red-700 text-white px-6 py-2 rounded-md cursor-pointer">
+                    <Trash2 />
                   </button>
                 </Link>
               </div>

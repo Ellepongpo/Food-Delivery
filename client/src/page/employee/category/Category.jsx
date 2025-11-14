@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Plus,Pencil,Trash2 } from 'lucide-react';
+import { Plus, Pencil, Trash2 } from 'lucide-react';
 import axios from "axios";
 
 
@@ -25,8 +25,12 @@ const Category = () => {
 
   }
 
-  const add = () => {
+  const addCategory = () => {
     navigate('/employee/addCategory')
+  }
+
+  const editCategory = (category) => {
+    navigate('/employee/editCategory' , {state: {category}})
   }
 
   return (
@@ -41,8 +45,8 @@ const Category = () => {
           <button className="w-full px-4 py-3 rounded-xl
           border border-blue-500 text-blue-600
           font-semibold hover:bg-blue-500 hover:text-white
-          transition-all duration-200 flex"
-            onClick={add}>
+          transition-all duration-200 flex cursor-pointer"
+            onClick={addCategory}>
             <Plus className="mr-2" />
             Add Category
           </button>
@@ -73,7 +77,7 @@ const Category = () => {
 
                 <td className="text-white">
                   <button className="bg-blue-500 px-6 py-1 mr-3 rounded-md cursor-pointer hover:bg-blue-700"
-                    onClick={() => navigate('/employee/editCategory')}>
+                    onClick={() => editCategory(item)}>
                     <Pencil />
                   </button>
 
