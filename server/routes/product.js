@@ -1,5 +1,5 @@
 import express from 'express'
-import { addProduct,listProduct , searchProduct} from '../controllers/product.js'
+import { addProduct,editProduct,listProduct , searchProduct} from '../controllers/product.js'
 import { upload } from '../upload.js'
 
 
@@ -10,6 +10,7 @@ const router = express.Router()
 router.post('/addProduct',upload.single('product_image'), addProduct)
 router.get('/product', listProduct)
 router.get('/product/:id' , searchProduct)
+router.post('/editProduct', upload.single('product_image') , editProduct)
 
 
 

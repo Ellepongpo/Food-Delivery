@@ -199,8 +199,21 @@ export const getOrderById = async (req, res) => {
             where o.order_id = ?
             `, [order_id]
         )
+
+        //ดึง rider
+        const [rider] = await db.query(
+            `
+            select 
+	            concat (e.first_name," ",e.last_name) as full_name,
+                e.position
+            from Orders o
+            join Employee e on o.deliveryBy = e.employee_id
+            where order_id = ?
+            `,[order_id]
+        )
+
         res.status(201).json({
-            products: products, accessories: accessories, customer: customer
+            products: products, accessories: accessories, customer: customer , rider:rider
         })
     } catch (err) {
         res.status(500).json({ message: "server error" })
@@ -208,10 +221,10 @@ export const getOrderById = async (req, res) => {
 }
 
 //customer ยกเลิก order
-export const requestedCancel = async (req ,res) =>{
-    const {order_id} = req.body
+export const requestedCancel = async (req, res) => {
+    const { order_id } = req.body
 
-    try{
+    try {
         await db.query(
             `
             update Orders
@@ -219,12 +232,12 @@ export const requestedCancel = async (req ,res) =>{
                 order_status = "Requested_Canceled",
                 cancel_dateTime = now()
             where order_id = ?
-            `,[order_id]
+            `, [order_id]
         )
-        
-        res.status(201).json({message:"ยกเลิกคำสั่งซื้อเรียบร้อยแล้ว"})
-    }catch(err){
-        res.status(500).json({message:"server error"})
+
+        res.status(201).json({ message: "ยกเลิกคำสั่งซื้อเรียบร้อยแล้ว" })
+    } catch (err) {
+        res.status(500).json({ message: "server error" })
     }
 }
 
@@ -322,7 +335,7 @@ export const updateOrderStatus = async (req, res) => {
             case "Accepted":
             case "Cooking":
             case "Ready_for_Delivery":
-    
+
                 const columnMap = {
                     "Accepted": "accepted_dateTime",
                     "Cooking": "cooking_dateTime",

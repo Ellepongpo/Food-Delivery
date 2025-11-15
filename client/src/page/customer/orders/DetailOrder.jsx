@@ -20,6 +20,7 @@ const DetailOrder = () => {
   const [products, setProducts] = useState([])
   const [accessories, setAccessories] = useState([])
   const [customer, setCustomer] = useState([])
+  const [rider , setRider] = useState([])
   console.log(head_order)
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const DetailOrder = () => {
       setProducts(res.data.products)
       setAccessories(res.data.accessories)
       setCustomer(res.data.customer)
+      setRider(res.data.rider)
     } catch (err) {
       console.log(err)
     }
@@ -90,6 +92,14 @@ const DetailOrder = () => {
           </div>
           <div>
             <span className='text-sm font-bold'> วันเวลาที่สั่งซื้อ : </span> {head_order.create_dateTime}
+          </div>
+          <div>
+            {head_order.order_status === "Delivery" && rider.length > 0 && rider[0].position === "Rider" && (
+              <>
+                <span className='text-sm font-bold'> พนักงานจัดส่ง : </span>
+                <span>{rider[0].full_name}</span>
+              </>
+            )}
           </div>
 
         </div>

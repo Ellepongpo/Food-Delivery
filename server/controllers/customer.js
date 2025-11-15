@@ -30,7 +30,7 @@ export const editCustomer = async (req , res) => {
             ]
         )
 
-        //เช็คว่า email กับ phone ซ้ำไหม
+        //เช็คว่า email กับ phone ซ้ำกับ customer คนอื่นไหม
         const [check] = await db.query(
             `select *
             from Customer

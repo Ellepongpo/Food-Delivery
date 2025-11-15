@@ -69,10 +69,11 @@ export const listProduct = async (req, res) => {
                 p.status,
                 p.product_image,
                 c.category_name,
-                GROUP_CONCAT(ps.accessories_name SEPARATOR ',') AS accessories
+                c.category_id,
+                GROUP_CONCAT(pa.accessories_name SEPARATOR ',') as accessories
             FROM Product p
             JOIN Category c ON p.category_id = c.category_id
-            LEFT JOIN Product_Accessories ps ON p.product_id = ps.product_id
+            LEFT JOIN Product_Accessories pa ON p.product_id = pa.product_id
             GROUP BY p.product_id`
         )
         res.status(201).json({ product: product })
@@ -115,6 +116,101 @@ export const searchProduct = async (req, res) => {
         }
 
     } catch (err) {
+        res.status(500).json({ message: "server error" })
+    }
+
+}
+
+
+// edit product
+export const editProduct = async (req, res) => {
+    const { product_id, product_name, description, product_price,
+        stock_qty_product, status, category_id, employee_id
+    } = req.body
+
+    try {
+        await db.beginTransaction()
+        //ดึงข้อมูลเดิม
+        const [result] = await db.query(
+            `
+            select 
+                p.product_id,
+                p.product_name,
+                p.description,
+                p.product_price,
+                p.stock_qty_product,
+                p.status,
+                p.product_image,
+                p.category_id,
+                GROUP_CONCAT(pa.accessories_name SEPARATOR ',') as accessories
+            from Product p
+            left join Product_Accessories pa on p.product_id = pa.product_id
+            where p.product_id = ?
+            `, [product_id]
+        )
+
+        const old = result[0]
+        let product_image = old.product_image
+        if (req.file) {
+            product_image = `/uploads/${req.file.filename} `
+        }
+
+        //insert to history
+        await db.query(
+            `
+            insert into History_edit_product
+
+            (product_name, description, product_price, stock_qty_product, status, product_image, 
+            category_id, accessories_name, product_id, editBy, edit_dateTime) 
+
+            values (?,?,?,?,?,?,?,?,?,?, now())
+            `
+            ,[old.product_name, old.description, old.product_price, old.stock_qty_product, old.status, old.product_image,
+            old.category_id, old.accessories, old.product_id, employee_id]
+        )
+
+        //access ที่รับมา
+        const accessories = req.body.accessories_name
+        let accessories_name = []
+
+        if (accessories) {
+            accessories_name = accessories.split(",").map((item) => item.trim())
+        }
+        //console.log(accessories_name)
+
+        //ลบ product_access เดิมออก
+        await db.query(
+            `delete from Product_Accessories where product_id = ?`, [product_id]
+        )
+        //insert อันใหม่
+        if(accessories_name.length > 0){
+            for(const access of accessories_name){
+                await db.query(
+                    `insert into Product_Accessories
+                    (product_id , accessories_name) values (?,?)`,[product_id, access]
+                )
+            }
+        }
+
+
+        //update product
+        await db.query(
+            `
+            update Product
+            set
+                product_name = ? , description = ? , product_price = ?,
+                stock_qty_product = ? , status = ? , product_image = ?,
+                category_id = ?
+            where product_id = ?
+            `,[product_name, description, product_price, stock_qty_product, status, product_image, category_id, product_id]
+        )
+
+
+        await db.commit()
+        res.status(201).json({ message: "แก้ไขข้อมูลสินค้าเรียบร้อย" })
+    } catch (err) {
+        await db.rollback()
+        console.log(err)
         res.status(500).json({ message: "server error" })
     }
 

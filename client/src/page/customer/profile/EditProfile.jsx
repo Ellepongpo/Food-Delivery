@@ -5,7 +5,7 @@ import axios from "axios"
 import {toast} from 'react-toastify'
 
 const EditProfile = () => {
-  const customer_id = useDeliveryStore((state) => state.customer.id)
+  const customer = useDeliveryStore((state) => state.customer)
   const setCustomer = useDeliveryStore((state)=> state.setCustomer)
   const navigate = useNavigate()
   //console.log(customer)
@@ -28,7 +28,7 @@ const EditProfile = () => {
   useEffect(() => {
     if (customer) {
       setForm({
-        customer_id: customer_id,
+        customer_id: customer.id,
         first_name: customer.first_name,
         last_name: customer.last_name,
         birthday: customer.birthday,

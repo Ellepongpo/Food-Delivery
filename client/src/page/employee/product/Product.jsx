@@ -10,7 +10,7 @@ const Product = () => {
 
   useEffect(() => {
     hdlFetchProduct()
-  }, [])
+  }, [listProduct])
 
   const hdlFetchProduct = async () => {
     try {
@@ -21,6 +21,10 @@ const Product = () => {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const editProduct = (product) =>{
+    navigate('/employee/editProduct' , {state: {product}})
   }
 
   return (
@@ -81,7 +85,7 @@ const Product = () => {
 
                   <td className="flex flex-row items-center justify-center py-8 text-white mr-16 ml-16">
                     <button className="bg-blue-500 px-6 py-1 mr-3 rounded-md cursor-pointer hover:bg-blue-700"
-                      onClick={() => navigate('/employee/editProduct')}>
+                      onClick={() => editProduct(item)}>
                       <Pencil />
                     </button>
 

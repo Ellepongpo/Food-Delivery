@@ -59,13 +59,13 @@ const Address = () => {
                     {item.house_no}
                   </div>
                   <div>
-                    {item.sub_district}
+                    ต.{item.sub_district}
                   </div>
                   <div>
-                    {item.district}
+                    อ.{item.district}
                   </div>
                   <div>
-                    {item.province}
+                    จ.{item.province}
                   </div>
                   <div>
                     {item.zip_code}

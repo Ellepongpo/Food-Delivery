@@ -108,9 +108,9 @@ const InfoProfile = () => {
                         defaultAddress.map((item) => (
                             <div key={item.address_id} className="flex gap-2">
                                 <span>{item.house_no}</span>
-                                <span>{item.sub_district}</span>
-                                <span>{item.district}</span>
-                                <span>{item.province}</span>
+                                <span>ต.{item.sub_district}</span>
+                                <span>อ.{item.district}</span>
+                                <span>จ.{item.province}</span>
                                 <span>{item.zip_code}</span>
                                 <span>{item.phone}</span>
                             </div>

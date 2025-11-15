@@ -12,7 +12,7 @@ const DefaultAddress = () => {
   }, [])
 
   const hdlFetchAddress = async () => {
-    
+
     try {
       const res = await axios.post('http://localhost:3000/api/address', { customer_id: customer_id })
       setAddress(res.data.address)
@@ -21,12 +21,12 @@ const DefaultAddress = () => {
     }
   }
 
-  const hdlDefaultAddress = async (address_id) =>{
-    
-    try{
-      const res = await axios.post('http://localhost:3000/api/addDefaultAddress' , {address_id,customer_id})
+  const hdlDefaultAddress = async (address_id) => {
+
+    try {
+      const res = await axios.post('http://localhost:3000/api/addDefaultAddress', { address_id, customer_id })
       toast.success(res.data.message)
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
@@ -46,7 +46,7 @@ const DefaultAddress = () => {
                 <input
                   type="radio"
                   name="defaultAddress"
-                  onChange={()=> hdlDefaultAddress(item.address_id)}
+                  onChange={() => hdlDefaultAddress(item.address_id)}
                 />
               </div>
 
@@ -56,13 +56,13 @@ const DefaultAddress = () => {
                     {item.house_no}
                   </div>
                   <div>
-                    {item.sub_district}
+                    ต.{item.sub_district}
                   </div>
                   <div>
-                    {item.district}
+                    อ.{item.district}
                   </div>
                   <div>
-                    {item.province}
+                    จ.{item.province}
                   </div>
                   <div>
                     {item.zip_code}
