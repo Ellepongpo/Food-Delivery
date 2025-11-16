@@ -12,6 +12,7 @@ import productRouter from './routes/product.js'
 import addressRouter from './routes/address.js'
 import orderRouter from './routes/order.js'
 import customerRouter from './routes/customer.js'
+import employeeRouter from './routes/employee.js'
 
 
 dotenv.config();
@@ -32,6 +33,7 @@ app.use('/api',productRouter)
 app.use('/api',addressRouter)
 app.use('/api',orderRouter)
 app.use('/api',customerRouter)
+app.use('/api',employeeRouter)
 
 
 

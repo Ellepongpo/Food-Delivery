@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import {
   LayoutDashboard, ChartBarStacked,
   Utensils, Hamburger, BellRing, BookX,
-  UserRoundPlus, UserRoundPen,LogOut,Motorbike
+  UserRoundPlus, UserRoundPen, LogOut, Motorbike
 } from 'lucide-react';
 import useEmployeeStore from "../../store/Employee-store";
 import { toast } from "react-toastify";
@@ -36,17 +36,21 @@ const SideBarEmp = () => {
         Dashboard Employee
       </div>
 
-      {(position === "Manager" || position === "Staff") &&
-        <>
-          <nav className="flex-col px-4 py-4 space-y-2">
-            <NavLink
-              to={'/employee'}
-              end
-              className={({ isActive }) => isActive ? active : idle}>
-              <LayoutDashboard className="mr-2" />
-              Dashborad
-            </NavLink>
 
+      <nav className="flex-col px-4 py-4 space-y-2">
+
+        {(position === "Manager" || position === "Staff" || position === "Rider") && (
+          <NavLink
+            to={'/employee'}
+            end
+            className={({ isActive }) => isActive ? active : idle}>
+            <LayoutDashboard className="mr-2" />
+            Dashborad
+          </NavLink>
+        )}
+
+        {(position === "Manager" || position === "Staff") && (
+          <>
             <NavLink
               to={'category'}
               className={({ isActive }) => isActive ? active : idle}>
@@ -67,8 +71,12 @@ const SideBarEmp = () => {
               <Hamburger className="mr-2" />
               Product
             </NavLink>
-          </nav>
+          </>
+        )}
+      </nav>
 
+      {(position === "Manager" || position === "Staff") && (
+        <>
           <label className="px-4 mt-6 mb-2 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
             Order Management
           </label>
@@ -88,9 +96,9 @@ const SideBarEmp = () => {
               Cancelled Order
             </NavLink>
           </nav>
-
         </>
-      }
+      )}
+
 
       {position === "Manager" &&
         <>
@@ -107,10 +115,10 @@ const SideBarEmp = () => {
             </NavLink>
 
             <NavLink
-              to={'infoEmployee'}
+              to={'listEmployee'}
               className={({ isActive }) => isActive ? active : idle}>
               <UserRoundPen className="mr-2" />
-              Info Employee
+              Employee
             </NavLink>
           </nav>
         </>

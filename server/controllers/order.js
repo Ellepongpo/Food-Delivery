@@ -141,7 +141,7 @@ export const listOrders = async (req, res) => {
             ) AS ot ON o.order_id = ot.order_id
 
             WHERE o.customer_id = ?
-            ORDER BY o.create_dateTime ASC;
+            ORDER BY o.order_status ASC;
             `, [customer_id]
         )
 
@@ -250,7 +250,7 @@ export const orders = async (req, res) => {
 
         const [orders] = await db.query(
             `
-            SELECT 
+            select 
                 o.order_id,
                 o.order_status,
                 o.create_dateTime,
@@ -258,17 +258,17 @@ export const orders = async (req, res) => {
                 ot.sub_total, o.delivery_cost,
                 ROUND(ot.sub_total * 0.07, 2) AS vat_amount,
                 ROUND(ot.sub_total + ot.sub_total * 0.07 + o.delivery_cost, 2) AS total_amount
-            FROM Orders o
-            JOIN Customer c ON o.customer_id = c.customer_id
-            JOIN (
-                SELECT 
+            from Orders o
+            join Customer c on o.customer_id = c.customer_id
+            join (
+                select 
                 order_id,
-                SUM(order_product_qty * unit_price) AS sub_total
-                FROM Order_Product
-                GROUP BY order_id
-            ) AS ot ON o.order_id = ot.order_id
-            WHERE o.order_status = ? 
-            ORDER BY o.create_dateTime ASC;
+                SUM(order_product_qty * unit_price) as sub_total
+                from Order_Product
+                group by order_id
+            ) as ot on o.order_id = ot.order_id
+            where o.order_status = ? 
+            order by o.create_dateTime ASC;
             `, [order_status]
         )
 

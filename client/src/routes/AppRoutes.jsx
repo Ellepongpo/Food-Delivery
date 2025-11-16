@@ -15,7 +15,6 @@ import Address from '../page/customer/address/Address'
 import DefaultAddress from '../page/customer/address/DefaultAddress'
 import LoginEmployee from '../page/auth/LoginEmployee'
 import SignUpEmployee from '../page/auth/SignUpEmployee'
-import InfoEmployee from '../page/employee/info/InfoEmployee'
 import Orders from '../page/employee/orders/Orders'
 import AddCategory from '../page/employee/category/AddCategory'
 import EditCategory from '../page/employee/category/EditCategory'
@@ -36,6 +35,8 @@ import ShowOrders from '../page/customer/orders/ShowOrders'
 import DetailOrder from '../page/customer/orders/DetailOrder'
 import CancelOrder from '../page/employee/orders/CancelOrder'
 import UpdateOrder from '../page/employee/orders/UpdateOrder'
+import Employee from '../page/employee/info/Employee'
+import EditEmployee from '../page/employee/info/EditEmployee'
 
 
 
@@ -77,7 +78,8 @@ const router = createBrowserRouter([
             { path: 'delivery', element: <Delivery /> },
             { path: 'login', element: <LoginEmployee /> },
             { path: 'signup', element: <SignUpEmployee /> },
-            { path: 'infoEmployee', element: <InfoEmployee /> }
+            { path: 'listEmployee', element: <Employee /> },
+            { path: 'editEmployee', element: <EditEmployee /> },
         ]
     },
     //หน้าของ customer

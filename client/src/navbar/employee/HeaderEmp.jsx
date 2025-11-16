@@ -8,7 +8,7 @@ const HeaderEmp = () => {
     <div className='bg-white h-16 flex items-center justify-end px-6 gap-3 mr-6'>
       <img className="size-8" src={user} alt="profile" />
       <span className='text-gray-700 font-medium'>
-        {employee? employee.position : null}
+        {employee? `${employee.position} (${employee.first_name})`  : null}
       </span>
     </div>
   )

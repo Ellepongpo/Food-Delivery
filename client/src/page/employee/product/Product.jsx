@@ -15,7 +15,7 @@ const Product = () => {
   const hdlFetchProduct = async () => {
     try {
       const res = await axios.get('http://localhost:3000/api/product')
-      console.log(res.data.product)
+      //console.log(res.data.product)
       setListProduct(res.data.product)
 
     } catch (err) {

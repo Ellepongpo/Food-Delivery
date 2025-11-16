@@ -94,7 +94,7 @@ const DetailOrder = () => {
             <span className='text-sm font-bold'> วันเวลาที่สั่งซื้อ : </span> {head_order.create_dateTime}
           </div>
           <div>
-            {head_order.order_status === "Delivery" && rider.length > 0 && rider[0].position === "Rider" && (
+            {(head_order.order_status === "Delivery" || head_order.order_status === "Completed") && rider.length > 0 && rider[0].position === "Rider" && (
               <>
                 <span className='text-sm font-bold'> พนักงานจัดส่ง : </span>
                 <span>{rider[0].full_name}</span>
