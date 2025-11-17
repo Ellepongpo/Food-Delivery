@@ -30,7 +30,7 @@ const Category = () => {
   }
 
   const editCategory = (category) => {
-    navigate('/employee/editCategory' , {state: {category}})
+    navigate('/employee/editCategory', { state: { category } })
   }
 
   return (
@@ -67,27 +67,34 @@ const Category = () => {
             </tr>
           </thead>
           <tbody>
-            {listCategory.map((item) => (
-              <tr key={item.category_id} className="hover:bg-gray-100 shadow-md mb-2">
-                <td className="p-2">{item.category_name}</td>
-                <td className="p-2">
-                  <img src={`http://localhost:3000${item.category_image}`} className="size-20 mx-auto" />
-                </td>
-                <td className="p-2">{item.status}</td>
+            {
+              listCategory.map((item) => (
+                <tr key={item.category_id} className="hover:bg-gray-100 shadow-md mb-2">
+                  <td className="p-2">{item.category_name}</td>
+                  <td className="p-2">
+                    <img src={`http://localhost:3000${item.category_image}`} className="size-20 mx-auto" />
+                  </td>
+                  {item.status === "IsActive" && (
+                    <td className="p-2 text-green-700">{item.status}</td>
+                  )}
+                  {item.status === "InActive" && (
+                    <td className="p-2 text-red-700">{item.status}</td>
+                  )}
 
-                <td className="text-white">
-                  <button className="bg-blue-500 px-6 py-1 mr-3 rounded-md cursor-pointer hover:bg-blue-700"
-                    onClick={() => editCategory(item)}>
-                    <Pencil />
-                  </button>
+                  <td className="text-white">
+                    <button className="bg-blue-500 px-6 py-1 mr-3 rounded-md cursor-pointer hover:bg-blue-700"
+                      onClick={() => editCategory(item)}>
+                      <Pencil />
+                    </button>
 
-                  <button className="bg-red-600 px-6 py-1 rounded-md cursor-pointer">
-                    <Trash2 />
-                  </button>
-                </td>
+                    <button className="bg-red-600 px-6 py-1 rounded-md cursor-pointer">
+                      <Trash2 />
+                    </button>
+                  </td>
 
-              </tr>
-            ))}
+                </tr>
+              ))
+            }
 
           </tbody>
         </table>

@@ -359,7 +359,7 @@ export const updateOrderStatus = async (req, res) => {
 
             default:
                 await db.rollback()
-                res.status(400).json({ message: "Invalid or unhandled order_status" })
+                res.status(400).json({ message: "สถานะคำสั่งซื้อไม่ถูกต้อง" })
         }
 
         await db.commit()

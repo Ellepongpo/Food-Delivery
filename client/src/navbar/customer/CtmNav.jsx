@@ -14,7 +14,7 @@ const CtmNav = () => {
         try {
             const res = await actionLogout()
             toast.success(res.data?.message)
-            navigate('/login')
+            navigate('/')
         } catch (err) {
             toast.error(err.response?.data?.message)
         }

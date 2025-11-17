@@ -56,33 +56,6 @@ export const addProduct = async (req, res) => {
     }
 }
 
-//โชว์สินค้าทั้งหมด
-export const listProduct = async (req, res) => {
-    try {
-        const [product] = await db.query(
-            `SELECT 
-                p.product_id,
-                p.product_name,
-                p.description,
-                p.product_price,
-                p.stock_qty_product,
-                p.status,
-                p.product_image,
-                c.category_name,
-                c.category_id,
-                GROUP_CONCAT(pa.accessories_name SEPARATOR ',') as accessories
-            FROM Product p
-            JOIN Category c ON p.category_id = c.category_id
-            LEFT JOIN Product_Accessories pa ON p.product_id = pa.product_id
-            GROUP BY p.product_id`
-        )
-        res.status(201).json({ product: product })
-
-    } catch (err) {
-        res.status(500).json({ message: "server error" })
-    }
-}
-
 //โชว์สินค้าตามประเภทของสินค้า ไว้ใช้ในหน้า menu
 export const searchProduct = async (req, res) => {
     const { id } = req.params
@@ -119,6 +92,34 @@ export const searchProduct = async (req, res) => {
         res.status(500).json({ message: "server error" })
     }
 
+}
+
+//employee
+//โชว์สินค้าทั้งหมด
+export const listProduct = async (req, res) => {
+    try {
+        const [product] = await db.query(
+            `SELECT 
+                p.product_id,
+                p.product_name,
+                p.description,
+                p.product_price,
+                p.stock_qty_product,
+                p.status,
+                p.product_image,
+                c.category_name,
+                c.category_id,
+                GROUP_CONCAT(pa.accessories_name SEPARATOR ',') as accessories
+            FROM Product p
+            JOIN Category c ON p.category_id = c.category_id
+            LEFT JOIN Product_Accessories pa ON p.product_id = pa.product_id
+            GROUP BY p.product_id`
+        )
+        res.status(201).json({ product: product })
+
+    } catch (err) {
+        res.status(500).json({ message: "server error" })
+    }
 }
 
 

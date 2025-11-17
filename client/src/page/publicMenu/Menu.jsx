@@ -71,9 +71,13 @@ const Menu = () => {
 
             {
               listCategory.map((item) => (
-                <div key={item.category_id}>
-                  <input type="radio" name="category" value={item.category_id} onChange={hdlOnChange} /> {item.category_name}
-                </div>
+                <>
+                  {item.status === "IsActive" && (
+                    <div key={item.category_id}>
+                      <input type="radio" name="category" value={item.category_id} onChange={hdlOnChange} /> {item.category_name}
+                    </div>
+                  )}
+                </>
               ))
             }
           </div>
@@ -89,9 +93,9 @@ const Menu = () => {
           {
             listProduct.map((item) => (
               // <div key={item.product_id} onClick={()=> goto(item)}>
-                <ShowProduct item={item} key={item.product_id}/>
+              <ShowProduct item={item} key={item.product_id} />
               // </div>
-          ))}
+            ))}
         </div>
 
       </div>

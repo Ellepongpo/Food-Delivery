@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
 import { ShieldUser, MapPinHouse, MapPinCheck, ListOrdered, LogOut } from 'lucide-react';
 import useDeliveryStore from "../../../store/Customer-store";
 import { toast } from 'react-toastify'
@@ -9,11 +9,13 @@ const idle = 'text-black px-4 py-2 hover:bg-orange-400 hover:text-white rounded 
 
 const Profile = () => {
   const actionLogout = useDeliveryStore((state) => state.actionLogout)
+  const navigate = useNavigate()
 
   const hdlLogout = async () => {
     try {
       const res = await actionLogout()
       toast.success(res.data.message)
+      navigate('/')
     } catch (err) {
       console.log(err)
       toast.error(err.response?.data?.message)

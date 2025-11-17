@@ -61,6 +61,7 @@ const EditCategory = () => {
         try{
             const res = await axios.post('http://localhost:3000/api/editCategory', editCategory)
             toast.success(res.data.message)
+            navigate('/employee/category')
         }catch(err){
             console.log(err)
             toast.error(err.response.data.message)
