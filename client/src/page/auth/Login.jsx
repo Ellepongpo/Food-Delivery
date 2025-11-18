@@ -18,7 +18,7 @@ const Login = () => {
     setLogin({
       ...login, [e.target.name]: e.target.value
     })
-    console.log(login)
+    //console.log(login)
   }
 
   const hdlSubmit = async (e) => {
@@ -26,30 +26,14 @@ const Login = () => {
     //send to back
     try{
       const res = await actionLogin(login)
-      navigate('/customer/menu')
+      navigate('/customer/profile/address')
       toast.success(res.data.message)
     }catch(err){
       const errMsg = err.response?.data?.message
       toast.error(errMsg)
     }
   }
-
-  /*
-  const hdlSubmit = async (e) => {
-    e.preventDefault()
-    console.log(login)
-
-    try {
-      const res = await axios.post('http://localhost:3000/api/login', login)
-      console.log(res)
-      toast.success(res.data.message)
-    } catch (err) {
-      console.log(err)
-      const errMsg = err.response?.data?.message
-      toast.error(errMsg)
-    }
-
-  }*/
+  
 
 
   return (

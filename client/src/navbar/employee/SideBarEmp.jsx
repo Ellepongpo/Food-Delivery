@@ -77,7 +77,7 @@ const SideBarEmp = () => {
 
       {(position === "Manager" || position === "Staff") && (
         <>
-          <label className="px-4 mt-6 mb-2 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
+          <label className="px-4 mt-1 mb-1 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
             Order Management
           </label>
 
@@ -102,7 +102,7 @@ const SideBarEmp = () => {
 
       {position === "Manager" &&
         <>
-          <label className="px-4 mt-6 mb-2 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
+          <label className="px-4 mt-1 mb-1 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
             Employee Mangement
           </label>
 
@@ -127,7 +127,7 @@ const SideBarEmp = () => {
 
       {(position === "Rider" || position === "Manager") &&
         <>
-          <label className="px-4 mt-6 mb-2 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
+          <label className="px-4 mt-1 mb-1 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
             Delivery Mangement
           </label>
 

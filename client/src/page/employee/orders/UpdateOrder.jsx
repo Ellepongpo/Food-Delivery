@@ -101,7 +101,7 @@ const UpdateOrder = () => {
             </div>
           </div>
 
-          <div className="w-2/4 px-2 py-2 text-sm">
+          <div className="w-3/4 mr-4 py-2 text-sm">
             {
               customer.map((c) => (
                 <div key={c.full_name}>

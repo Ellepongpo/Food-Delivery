@@ -41,6 +41,7 @@ const Employee = () => {
                                 <th>Full_Name</th>
                                 <th>Email</th>
                                 <th>Password</th>
+                                <th>Position</th>
                                 <th>Create_DateTime</th>
                                 <th>Action</th>
                             </tr>
@@ -52,6 +53,7 @@ const Employee = () => {
                                         <td className="p-4">{item.first_name}  {item.last_name}</td>
                                         <td className="p-4">{item.email}</td>
                                         <td className="p-4">{item.password}</td>
+                                        <td className="p-4">{item.position}</td>
                                         <td className="p-4">{item.create_dateTime}</td>
                                         <td className="p-4">
                                             <div>

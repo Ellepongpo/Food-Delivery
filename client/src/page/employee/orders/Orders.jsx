@@ -51,11 +51,6 @@ const Orders = () => {
           Cooking
         </button>
         <button className="p-1 hover:text-blue-500 cursor-pointer"
-          onClick={() => setSelectStatus("Ready_for_Delivery")}
-        >
-          Ready_for_Delivery
-        </button>
-        <button className="p-1 hover:text-blue-500 cursor-pointer"
           onClick={() => setSelectStatus("Completed")}
         >
           Completed

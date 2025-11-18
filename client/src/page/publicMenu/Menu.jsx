@@ -71,13 +71,13 @@ const Menu = () => {
 
             {
               listCategory.map((item) => (
-                <>
+                <div key={item.category_id}>
                   {item.status === "IsActive" && (
-                    <div key={item.category_id}>
+                    <div>
                       <input type="radio" name="category" value={item.category_id} onChange={hdlOnChange} /> {item.category_name}
                     </div>
                   )}
-                </>
+                </div>
               ))
             }
           </div>

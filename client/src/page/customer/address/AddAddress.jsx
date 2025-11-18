@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useDeliveryStore from "../../../store/Customer-store"
 import axios from "axios"
 import { toast } from "react-toastify"
 
 const AddAddress = () => {
+    const navigate = useNavigate()
     const customer = useDeliveryStore((state) => state.customer)
     const [form, setForm] = useState({
         house_no: "",
@@ -31,6 +32,7 @@ const AddAddress = () => {
             const res = await axios.post('http://localhost:3000/api/addAddress', form)
             //console.log(res.data)
             toast.success(res.data.message)
+            navigate('/customer/profile/address')
         }catch(err){
             toast.error(err.response.data.message)
             console.log(err)
