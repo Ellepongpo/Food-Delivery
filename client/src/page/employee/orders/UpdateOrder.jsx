@@ -16,7 +16,7 @@ const UpdateOrder = () => {
   const employee_id = useEmployeeStore((state) => state.employee.id)
   const position = useEmployeeStore((state) => state.employee.position)
 
-  console.log(updateOrderStatus)
+  //console.log(updateOrderStatus)
 
   //console.log(head_order)
   useEffect(() => {

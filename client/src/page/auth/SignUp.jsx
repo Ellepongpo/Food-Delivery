@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {toast } from 'react-toastify';
 
@@ -28,7 +28,7 @@ const SignUp = () => {
 
   const hdlSubmit = async (e) => {
     e.preventDefault() //ป้องกันการรีเฟรชหน้า เมื่อมีการ submit
-    console.log(form)
+    //console.log(form)
 
     //send to backend
     try {
@@ -38,11 +38,9 @@ const SignUp = () => {
       navigate('/login')
     } catch (err) {
       console.log(err)
-      const errMsg = err.response?.data?.message
-      toast.error(errMsg)
+      toast.error(err.response?.data?.message)
     }
   }
-
 
 
 

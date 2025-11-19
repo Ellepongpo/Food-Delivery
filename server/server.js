@@ -1,7 +1,7 @@
 //step 1 import express
 import express from 'express'
 import morgan from 'morgan';
-import dotenv from 'dotenv'
+//import dotenv from 'dotenv'
 import cors from 'cors'
 
 //routes
@@ -15,7 +15,7 @@ import customerRouter from './routes/customer.js'
 import employeeRouter from './routes/employee.js'
 
 
-dotenv.config();
+//dotenv.config();
 const app = express()
 
 //middleware

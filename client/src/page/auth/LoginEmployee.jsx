@@ -6,8 +6,6 @@ import useEmployeeStore from '../../store/Employee-store'
 const LoginEmployee = () => {
   const navigate = useNavigate()
   const actionLogin = useEmployeeStore((state)=> state.actionLogin)
-  const employee = useEmployeeStore((state)=> state.employee)
-  const login_id = useEmployeeStore((state)=> state.login_id)
 
  
   const [login, setLogin] = useState({
@@ -19,7 +17,7 @@ const LoginEmployee = () => {
     setLogin({
       ...login, [e.target.name]: e.target.value
     })
-    console.log(login)
+    //console.log(login)
   }
 
   const hdlSubmit = async (e) => {

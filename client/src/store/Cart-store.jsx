@@ -31,7 +31,7 @@ const cartStore = (set, get) => ({
             set({ cart: updated })
         }
 
-        //console.log("📦 CART UPDATED:", get().cart)
+        //console.log("CART UPDATED:", get().cart)
         
     },
     actionRemoveFromCart: (product_id) => {
