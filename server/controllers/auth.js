@@ -67,7 +67,7 @@ export const login = async (req, res) => {
             phone: user[0].phone,
             gender: user[0].gender
         }
-        console.log(customer)
+        //console.log(customer)
 
         res.status(201).json({ message: "เข้าสู่ระบบสำเร็จ", customer: customer, login_id })
     } catch (err) {

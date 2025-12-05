@@ -42,8 +42,8 @@ export const addProduct = async (req, res) => {
         if (accessories_name.length > 0) {
             const values = accessories_name.map(name => [product_id, name]);
             await db.query(
-                `INSERT INTO Product_Accessories (product_id, accessories_name)
-                VALUES ?`,
+                `insert into Product_Accessories (product_id, accessories_name)
+                values ?`,
                 [values]
             )
         }
@@ -132,45 +132,57 @@ export const editProduct = async (req, res) => {
     try {
         await db.beginTransaction()
         //ดึงข้อมูลเดิม
-        const [result] = await db.query(
+        const [product] = await db.query(
             `
-            select 
-                p.product_id,
-                p.product_name,
-                p.description,
-                p.product_price,
-                p.stock_qty_product,
-                p.status,
-                p.product_image,
-                p.category_id,
-                GROUP_CONCAT(pa.accessories_name SEPARATOR ',') as accessories
+            select *
             from Product p
-            left join Product_Accessories pa on p.product_id = pa.product_id
             where p.product_id = ?
             `, [product_id]
         )
 
-        const old = result[0]
+        //ดึง accessories เดิม
+        const [accOld] = await db.query(
+            `select
+                pa.accessories_name 
+            from Product_Accessories pa
+            where pa.product_id = ?
+            `, [product_id]
+        )
+
+        const old = product[0]
         let product_image = old.product_image
         if (req.file) {
             product_image = `/uploads/${req.file.filename} `
         }
 
         //insert to history
-        await db.query(
-            `
-            insert into History_edit_product
+        if (accOld.length === 0) {
+            await db.query(
+                `
+                insert into History_edit_product
+                (product_id, edit_dateTime, product_name, description, product_price, stock_qty_product, status,
+                product_image, category_id, editBy)
+                values ( ?, now(), ?,?,?,?,?,?,?,? )
+                `,
+                [old.product_id, old.product_name, old.description, old.product_price, old.stock_qty_product, old.status,
+                old.product_image, old.category_id, employee_id]
+            )
+        } else {
+            for (const acc of accOld) {
+                await db.query(
+                    `
+                    insert into History_edit_product
+                    (product_id, edit_dateTime, product_name, description, product_price, stock_qty_product, status,
+                    product_image, category_id, accessories_name, editBy)
+                    values ( ?, now(), ?,?,?,?,?,?,?,?,? )
+                    `,
+                    [old.product_id, old.product_name, old.description, old.product_price, old.stock_qty_product, old.status,
+                    old.product_image, old.category_id,acc.accessories_name,employee_id]
+                )
+            }
+        }
 
-            (product_name, description, product_price, stock_qty_product, status, product_image, 
-            category_id, accessories_name, product_id, editBy, edit_dateTime) 
-
-            values (?,?,?,?,?,?,?,?,?,?, now())
-            `
-            ,[old.product_name, old.description, old.product_price, old.stock_qty_product, old.status, old.product_image,
-            old.category_id, old.accessories, old.product_id, employee_id]
-        )
-
-        //access ที่รับมา
+        //accessories ใหม่ที่รับมา
         const accessories = req.body.accessories_name
         let accessories_name = []
 
@@ -184,11 +196,11 @@ export const editProduct = async (req, res) => {
             `delete from Product_Accessories where product_id = ?`, [product_id]
         )
         //insert อันใหม่
-        if(accessories_name.length > 0){
-            for(const access of accessories_name){
+        if (accessories_name.length > 0) {
+            for (const access of accessories_name) {
                 await db.query(
                     `insert into Product_Accessories
-                    (product_id , accessories_name) values (?,?)`,[product_id, access]
+                    (product_id , accessories_name) values (?,?)`, [product_id, access]
                 )
             }
         }
@@ -203,7 +215,7 @@ export const editProduct = async (req, res) => {
                 stock_qty_product = ? , status = ? , product_image = ?,
                 category_id = ?
             where product_id = ?
-            `,[product_name, description, product_price, stock_qty_product, status, product_image, category_id, product_id]
+            `, [product_name, description, product_price, stock_qty_product, status, product_image, category_id, product_id]
         )
 
 

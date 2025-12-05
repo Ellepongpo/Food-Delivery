@@ -3,6 +3,8 @@ import { addOrder, listOrders ,getOrderById, orders, updateOrderStatus, requeste
 
 const router = express.Router()
 
+//endpoint http://localhost:3000/api/order
+
 //customer
 router.post('/addOrder', addOrder)
 router.post('/orders', listOrders)

@@ -5,6 +5,7 @@ import home2 from '../../assets/home2.jpg'
 import home3 from '../../assets/home3.jpg'
 import home4 from '../../assets/home4.jpg'
 import home5 from '../../assets/home5.jpg'
+import axios from "axios";
 
 
 const heroImages = [
@@ -17,7 +18,8 @@ const heroImages = [
 
 
 const Home = () => {
-  const [heroIndex, setHeroIndex] = useState(0);
+  const [heroIndex, setHeroIndex] = useState(0)
+  const [category, setCategory] = useState([])
 
   const handlePrev = () => {
     setHeroIndex((prev) => (prev === 0 ? heroImages.length - 1 : prev - 1));
@@ -34,6 +36,19 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    hdlCategory()
+  }, [])
+
+  const hdlCategory = async () => {
+    try {
+      const res = await axios.get('http://localhost:3000/api/category')
+      setCategory(res.data.category)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
 
   return (
@@ -72,32 +87,22 @@ const Home = () => {
 
         <div className="h-64 mt-8 w-full max-w-3xl">
           <div className="flex justify-between">
-            <div>
-              <button className="border w-48 h-48 p-4 border-gray-300 rounded-md shadow-md flex items-center justify-center hover:bg-gray-200">
-                <div className="flex flex-col gap-4">
-                  <Hamburger className="size-15" />
-                  <span>Burger</span>
+            {
+              category.map((item) => (
+                <div key={item.category_id}>
+                  {item.status === "IsActive" && (
+                    <>
+                      <button className="border w-48 h-48 p-4 border-gray-300 rounded-md shadow-md flex items-center justify-center hover:bg-gray-200">
+                        <div className="flex flex-col gap-4">
+                          <img src={`http://localhost:3000${item.category_image}`}  className="size-30 rounded-md"/>
+                          <span>{item.category_name}</span>
+                        </div>
+                      </button>
+                    </>
+                  )}
                 </div>
-              </button>
-            </div>
-
-            <div>
-              <button className="border w-48 h-48 p-4 border-gray-300 rounded-md shadow-md flex items-center justify-center hover:bg-gray-200">
-                <div className="flex flex-col gap-4">
-                  <Pizza className="size-15" />
-                  <span>Burger</span>
-                </div>
-              </button>
-            </div>
-
-            <div>
-              <button className="border w-48 h-48 p-4 border-gray-300 rounded-md shadow-md flex items-center justify-center hover:bg-gray-200">
-                <div className="flex flex-col gap-4">
-                  <CupSoda className="size-15" />
-                  <span>Burger</span>
-                </div>
-              </button>
-            </div>
+              ))
+            }
 
           </div>
         </div>

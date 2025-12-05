@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import useEmployeeStore from '../../store/Employee-store';
 
 const SignUpEmployee = () => {
-  const employee = useEmployeeStore((state)=> state.employee)
+  const employee = useEmployeeStore((state) => state.employee)
   const [form, setForm] = useState({
     first_name: "",
     last_name: "",
@@ -39,8 +39,7 @@ const SignUpEmployee = () => {
       toast.success(res.data.message)
     } catch (err) {
       console.log(err)
-      const errMsg = err.response?.data?.message
-      toast.error(errMsg)
+      toast.error(err.response?.data?.message)
     }
   }
 
@@ -202,10 +201,23 @@ const SignUpEmployee = () => {
               <span className='block text-sm font-medium text-gray-700'>เพศ (gender)</span>
               <div className='flex items-center gap-6 mt-2'>
                 <label className='inline-flex items-center gap-2'>
-                  <input name='gender' type="radio" value="Male"  required onChange={hdlOnChange} /><span>ชาย (male)</span>
+                  <input
+                    name='gender'
+                    type="radio"
+                    value="Male"
+                    required
+                    onChange={hdlOnChange}
+                  />
+                  <span>ชาย (male)</span>
                 </label>
                 <label className='inline-flex items-center gap-2'>
-                  <input name='gender' type="radio" value="Female" required onChange={hdlOnChange} /><span>หญิง (female)</span>
+                  <input
+                    name='gender'
+                    type="radio"
+                    value="Female"
+                    required
+                    onChange={hdlOnChange} />
+                  <span>หญิง (female)</span>
                 </label>
               </div>
             </div>

@@ -45,14 +45,14 @@ export const addDefaultAddress = async (req, res) => {
         //เครียค่าเดิม
         await db.query(
             `update Customer
-            set is_default = 0 , isDefault_dateTime = null , address_id = null
+            set isDefault_dateTime = null , address_id = null
             where customer_id = ? `, [customer_id]
         )
 
         //เพิ่มค่าใหม่
         await db.query(
             `update Customer
-            set is_default = ? , isDefault_dateTime = now() , address_id = ?
+            set isDefault_dateTime = now() , address_id = ?
             where customer_id = ? `, [1, address_id, customer_id]
         )
 

@@ -183,19 +183,19 @@ const DetailOrder = () => {
 
         <div className='flex justify-between px-48'>
           <div>
-            ค่าจัดส่ง
+            VAT 7%
           </div>
           <div>
-            {head_order.delivery_cost}฿
+            {head_order.vat_amount}฿
           </div>
         </div>
 
         <div className='flex justify-between px-48'>
           <div>
-            VAT 7%
+            ค่าจัดส่ง
           </div>
           <div>
-            {head_order.vat_amount}฿
+            {head_order.delivery_cost}฿
           </div>
         </div>
 

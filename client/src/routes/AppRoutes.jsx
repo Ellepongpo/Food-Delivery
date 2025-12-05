@@ -37,13 +37,14 @@ import CancelOrder from '../page/employee/orders/CancelOrder'
 import UpdateOrder from '../page/employee/orders/UpdateOrder'
 import Employee from '../page/employee/info/Employee'
 import EditEmployee from '../page/employee/info/EditEmployee'
+import SalePerDay from '../page/employee/summary-report/SalePerDay'
 
 
 
 
 
 const router = createBrowserRouter([
-    //หน้าที่เป็น public ไม่ต้อง login ก็สามารถดูได้
+    //หน้าที่เป็น public ไม่ต้อง login 
     {
         path: '/',
         element: <LayOut />,
@@ -56,9 +57,9 @@ const router = createBrowserRouter([
             { path: 'signup', element: <SignUp /> }
         ]
     },
-
-    { path: '/employee/login', element: <LoginEmployee /> },
+    
     //หน้าของ employee
+    { path: '/employee/login', element: <LoginEmployee /> },
     {
         path: '/employee',
         element: <ProtectEmployee element={<LayOutEMP />} />,
@@ -80,12 +81,12 @@ const router = createBrowserRouter([
             { path: 'signup', element: <SignUpEmployee /> },
             { path: 'listEmployee', element: <Employee /> },
             { path: 'editEmployee', element: <EditEmployee /> },
+            { path: 'salePerDay', element: <SalePerDay /> },
         ]
     },
     //หน้าของ customer
     {
         path: '/customer',
-        //element: <LayOutCTM />,
         // protect เป็นทางผ่าน
         element: <ProtectCustomer element={<LayOutCTM />} />,
         children: [

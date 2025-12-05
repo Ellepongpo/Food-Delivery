@@ -3,7 +3,6 @@ import { useState } from "react"
 import useEmployeeStore from "../../../store/Employee-store"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-//import Swal from 'sweetalert2'
 
 const AddCategory = () => {
     const navigate = useNavigate()

@@ -4,6 +4,8 @@ import {signUp,login,logout,
 
 const router = express.Router()
 
+//endpoint http://localhost:3000/api/auth
+
 //customer
 router.post('/signUp' , signUp)
 router.post('/login', login)

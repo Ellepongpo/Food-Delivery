@@ -40,7 +40,7 @@ const Order = () => {
     setSubTotal(subTotalResult)
   }, [cart])
 
-  const vat_amount = Math.round((subTotal + deliveryCost) * 0.07 * 100) / 100
+  const vat_amount = Math.round(subTotal * 0.07 * 100) / 100
 
   const total_amount = subTotal + deliveryCost + vat_amount
 
@@ -188,19 +188,19 @@ const Order = () => {
 
           <div className='flex justify-between px-16 mb-2'>
             <div>
-              ค่าจัดส่ง
+              VAT 7%
             </div>
             <div>
-              {deliveryCost}฿
+              {vat_amount}฿
             </div>
           </div>
 
           <div className='flex justify-between px-16'>
             <div>
-              VAT 7%
+              ค่าจัดส่ง
             </div>
             <div>
-              {vat_amount}฿
+              {deliveryCost}฿
             </div>
           </div>
 
@@ -238,7 +238,7 @@ const Order = () => {
 
 
         {payment && (
-          <div className='fixed inset-0 bg-black/20 flex place-items-center justify-center'>
+          <div className='fixed inset-0 bg-black/30 flex items-center justify-center'>
             <div className='bg-white w-full max-w-md rounded-xl shadow-md p-4'>
 
               <div className='px-4 py-2 mb-2'>

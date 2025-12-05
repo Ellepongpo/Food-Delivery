@@ -3,6 +3,8 @@ import { editEmployee, listEmployee } from '../controllers/employee.js'
 
 const router = expreess.Router()
 
+//endpoint http://localhost:3000/api/employee
+
 router.post('/listEmployee' , listEmployee)
 router.post('/editEmployee' , editEmployee)
 

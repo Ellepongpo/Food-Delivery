@@ -13,6 +13,7 @@ import addressRouter from './routes/address.js'
 import orderRouter from './routes/order.js'
 import customerRouter from './routes/customer.js'
 import employeeRouter from './routes/employee.js'
+import summaryRouter from './routes/summary.js'
 
 
 //dotenv.config();
@@ -34,6 +35,7 @@ app.use('/api',addressRouter)
 app.use('/api',orderRouter)
 app.use('/api',customerRouter)
 app.use('/api',employeeRouter)
+app.use('/api',summaryRouter)
 
 
 

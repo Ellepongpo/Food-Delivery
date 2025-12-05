@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -187,10 +187,22 @@ const SignUp = () => {
               <span className='block text-sm font-medium text-gray-700'>เพศ (gender)</span>
               <div className='flex items-center gap-6 mt-2'>
                 <label className='inline-flex items-center gap-2'>
-                  <input name='gender' type="radio" value="Male"  required onChange={hdlOnChange} /><span>ชาย (male)</span>
+                  <input
+                    name='gender'
+                    type="radio"
+                    value="Male"
+                    required
+                    onChange={hdlOnChange} />
+                  <span>ชาย (male)</span>
                 </label>
                 <label className='inline-flex items-center gap-2'>
-                  <input name='gender' type="radio" value="Female" required onChange={hdlOnChange} /><span>หญิง (female)</span>
+                  <input
+                    name='gender'
+                    type="radio"
+                    value="Female"
+                    required
+                    onChange={hdlOnChange} />
+                  <span>หญิง (female)</span>
                 </label>
               </div>
             </div>

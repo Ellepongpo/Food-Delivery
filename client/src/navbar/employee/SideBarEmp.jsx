@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import {
   LayoutDashboard, ChartBarStacked,
   Utensils, Hamburger, BellRing, BookX,
-  UserRoundPlus, UserRoundPen, LogOut, Motorbike
+  UserRoundPlus, UserRoundPen, LogOut, Motorbike ,FileChartColumnIncreasing
 } from 'lucide-react';
 import useEmployeeStore from "../../store/Employee-store";
 import { toast } from "react-toastify";
@@ -127,11 +127,11 @@ const SideBarEmp = () => {
 
       {(position === "Rider" || position === "Manager") &&
         <>
-          <label className="px-4 mt-1 mb-1 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
+          <label className="px-4 mt-1 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
             Delivery Mangement
           </label>
 
-          <nav className="flex-1 px-4 py-4 space-y-2 ">
+          <nav className="px-4 py-4 space-y-2 ">
             <NavLink
               to={'delivery'}
               className={({ isActive }) => isActive ? active : idle}>
@@ -141,6 +141,25 @@ const SideBarEmp = () => {
           </nav>
         </>
       }
+
+      {position === "Manager" &&
+        <>
+          <label className="px-4 text-xs font-semibold capitalize tracking-wider text-gray-400 flex-col">
+            Summary Report
+          </label>
+
+          <nav className="flex-1 px-4 py-2 space-y-2 ">
+            <NavLink
+              to={'salePerDay'}
+              className={({ isActive }) => isActive ? active : idle}>
+              <FileChartColumnIncreasing className="mr-2" />
+              Summary
+            </NavLink>
+          </nav>
+        </>
+      }
+
+      
 
       <button className="px-8 py-4 flex cursor-pointer mt-auto hover:text-red-300" onClick={hdlLogout}>
         <LogOut className="mr-2" />

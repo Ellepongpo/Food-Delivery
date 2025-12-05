@@ -24,9 +24,9 @@ const ShowOrders = () => {
     }
 
     const detailOrder = (order) => {
-        navigate(`/customer/profile/detailOrder/${order.order_id}`, {state: {order}})
+        navigate(`/customer/profile/detailOrder/${order.order_id}`, { state: { order } })
     }
-    
+
     return (
         <div className="h-full p-2">
             <div className="flex flex-col">
@@ -36,7 +36,9 @@ const ShowOrders = () => {
 
                 {
                     orders.map((order) => (
-                        <div className="border h-32 flex flex-row justify-between gap-2 mb-2 border-gray-300 rounded-md" key={order.order_id} onClick={()=> detailOrder(order)}>
+                        <div className="border h-32 flex flex-row justify-between gap-2 mb-2 border-gray-300 rounded-md cursor-pointer"
+                        key={order.order_id} onClick={() => detailOrder(order)}>
+
                             <div className="w-24 flex items-center justify-center">
                                 <img src={delivery} className='size-15' />
                             </div>
@@ -79,7 +81,7 @@ const ShowOrders = () => {
                                 <div className='p-2 font-bold'>
                                     <span>{order.total_amount}฿</span>
                                 </div>
-                               
+
                             </div>
                         </div>
                     ))

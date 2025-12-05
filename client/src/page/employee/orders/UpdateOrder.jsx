@@ -184,19 +184,19 @@ const UpdateOrder = () => {
 
             <div className="flex justify-between">
               <div>
-                <span>ค่าจัดส่ง</span>
+                <span>VAT 7%</span>
               </div>
               <div>
-                <span>{head_order.delivery_cost}฿</span>
+                <span>{head_order.vat_amount}฿</span>
               </div>
             </div>
 
             <div className="flex justify-between">
               <div>
-                <span>VAT 7%</span>
+                <span>ค่่าจัดส่ง</span>
               </div>
               <div>
-                <span>{head_order.vat_amount}฿</span>
+                <span>{head_order.delivery_cost}฿</span>
               </div>
             </div>
 
