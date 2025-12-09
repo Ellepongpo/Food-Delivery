@@ -14,7 +14,7 @@ const DefaultAddress = () => {
   const hdlFetchAddress = async () => {
 
     try {
-      const res = await axios.post('http://localhost:3000/api/address', { customer_id: customer_id })
+      const res = await axios.get('http://localhost:3000/api/address', {params : {customer_id: customer_id} })
       setAddress(res.data.address)
     } catch (err) {
       console.log(err)

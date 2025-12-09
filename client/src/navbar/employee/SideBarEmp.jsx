@@ -150,7 +150,7 @@ const SideBarEmp = () => {
 
           <nav className="flex-1 px-4 py-2 space-y-2 ">
             <NavLink
-              to={'salePerDay'}
+              to={'summary'}
               className={({ isActive }) => isActive ? active : idle}>
               <FileChartColumnIncreasing className="mr-2" />
               Summary

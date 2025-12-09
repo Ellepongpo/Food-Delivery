@@ -1,28 +1,50 @@
 import axios from "axios"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-const SalePerDay = () => {
+const Summary = () => {
+    const navigate = useNavigate()
     // sale date
     const [showSearchDay, setShowSearchDay] = useState(false)
     const [formSalePerDay, setFormSalePerDay] = useState({
         day: ""
     })
-    const [showSalePerDay, setshowSalePerDay] = useState(false)
-    const [resultSalePerDay, setResultSalePerDay] = useState([])
 
     const hdlSalePerDay = async (e) => {
         e.preventDefault()
 
         try {
-            const res = await axios.post('http://localhost:3000/api/salePerDay', formSalePerDay)
-            //console.log(res.data.result)
-            setResultSalePerDay(res.data.result)
-            setShowSearchDay(false)
-            setshowSalePerDay(true)
+            const res = await axios.get('http://localhost:3000/api/salePerDay', {params: {day : formSalePerDay.day}})
+            const result = res.data.result
+            navigate('/employee/showSalePerDay' , {state : {result}})
         } catch (err) {
             console.log(err)
         }
     }
+
+    //top 5 customer per month
+    const [showSearchTop5 ,setShowSearchTop5] = useState(false)
+    const [formTop5 , setFormTop5] = useState({
+        month: ""
+    })
+
+    const hdlCustomerTop5 = async (e) =>{
+        e.preventDefault()
+
+        try{
+            const res = await axios.get('http://localhost:3000/api/customerTopPerMonth', {params: {month: formTop5.month}})
+            //console.log(res.data.result)
+            const result = res.data.result
+            navigate('/employee/showCustomerTopPerMonth' , {state : {result}})
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+
+
+
 
     return (
         <div className="h-screen bg-white">
@@ -37,8 +59,9 @@ const SalePerDay = () => {
                 </div>
 
                 <div>
-                    <button className="bg-amber-500 px-16 py-4 hover:bg-amber-600 cursor-pointer">
-                        ยอดขายต่อวัน
+                    <button className="bg-amber-500 px-16 py-4 hover:bg-amber-600 cursor-pointer rounded-md"
+                        onClick={()=> setShowSearchTop5(true)}>
+                        ลูกค้า Top5 / เดือน
                     </button>
                 </div>
 
@@ -65,7 +88,7 @@ const SalePerDay = () => {
                 {showSearchDay && (
                     <div className="fixed inset-0 bg-black/30 flex items-center justify-center">
 
-                        <div className="bg-white w-full max-w-md roundec-md shadow-md p-4">
+                        <div className="bg-white w-full max-w-md rounded-md shadow-md p-4">
                             <div className="text-center text-xl font-bold mb-4">
                                 <span>ค้นหาวันที่</span>
                             </div>
@@ -101,49 +124,57 @@ const SalePerDay = () => {
                     </div>
                 )}
 
+
+
+
+                {/* Top5 */}
+                {showSearchTop5 && (
+                    <div className="fixed inset-0 bg-black/30 flex items-center justify-center">
+
+                        <div className="bg-white w-full max-w-md rounded-md shadow-md p-4">
+                            <div className="text-center font-bold text-xl">
+                                <span>ค้นหาเดือน</span>
+                            </div>
+
+                            <hr className="text-gray-300 m-4" />
+
+                            <div className="flex flex-col items-center justify-center">
+                                <form onSubmit={hdlCustomerTop5}>
+                                    <label className="block text-sm font-bold text-gray-700">เดือน</label>
+                                    <input className="border px-16 py-1 border-gray-500 rounded-md"
+                                        name="month"
+                                        type="month"
+                                        onChange={(e)=> setFormTop5({... formTop5, [e.target.name]: e.target.value})}
+                                    />
+
+
+                                    <div className="mt-8 flex items-center justify-center">
+                                        <button className="bg-red-500 hover:bg-red-700 px-8 py-2 text-white mr-2 rounded-md cursor-pointer"
+                                            type="button" onClick={()=> setShowSearchTop5(false)}>
+                                            Back
+                                        </button>
+
+                                        <button className="bg-blue-500 hover:bg-blue-700 px-8 py-2 text-white rounded-md cursor-pointer"
+                                            type="submit">
+                                            Search
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                )}
+                
+
             </div>
-
-
-
-            {/* โชว์ผลลัพธ์ ยอดขายในแต่ละวัน */}
-            {showSalePerDay && (
-                <div className="border flex-1 mt-16 border-gray-300 rounded-md mx-4">
-                    <div className="font-bold text-center p-4">
-                        <span>ยอดขายต่อวัน ไม่รวมค่าจัดส่งและ vat</span>
-                    </div>
-
-                    <div className="h-80">
-                        <table className="w-full bg-gray-300">
-                            <thead>
-                                <tr>
-                                    <th>วันที่ขาย</th>
-                                    <th>ยอดขายต่อวัน</th>
-                                </tr>
-                            </thead>
-                            <tbody className="text-center bg-white divide-y divide-gray-200">
-                                {resultSalePerDay.length === 0 ? (
-                                    <tr>
-                                        <td colSpan={2} className="p-4 text-gray-500">
-                                            ไม่พบข้อมูลยอดขายในวันที่เลือก
-                                        </td>
-                                    </tr>
-                                ) : (
-                                    resultSalePerDay.map((item) => (
-                                        <tr key={item.sale_date} className="hover:bg-gray-50">
-                                            <td className="p-4">{item.sale_date}</td>
-                                            <td className="p-4">{item.total_salePerDay}฿</td>
-                                        </tr>
-                                    ))
-                                )}
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            )}
+   
 
         </div>
     )
 }
 
-export default SalePerDay
+export default Summary

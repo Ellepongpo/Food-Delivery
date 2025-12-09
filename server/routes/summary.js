@@ -1,10 +1,11 @@
 import express from 'express'
-import { salePerDay } from '../controllers/summary.js'
+import { customerTopPerMonth, salePerDay } from '../controllers/summary.js'
 
 const router = express.Router()
 
 //endpoint http://localhost:3000/api/summary
 
-router.post('/salePerDay' , salePerDay)
+router.get('/salePerDay' , salePerDay)
+router.get('/customerTopPerMonth' , customerTopPerMonth)
 
 export default router

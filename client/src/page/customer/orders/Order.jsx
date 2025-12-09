@@ -26,7 +26,7 @@ const Order = () => {
 
   const hdlDefaultAddress = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/api/defaultAddress', { customer_id })
+      const res = await axios.get('http://localhost:3000/api/defaultAddress', { params : {customer_id : customer_id} })
       setAddress(res.data.defaultAddress)
     } catch (err) {
       console.log(err)

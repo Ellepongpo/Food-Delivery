@@ -39,7 +39,7 @@ const EditProduct = () => {
 
     setImagePreview(`http://localhost:3000${product.product_image}`)
 
-    // accessories เดิม (ถ้า backend ส่งมาเป็น string เช่น "ช้อน,ส้อม,ทิชชู่")
+    // accessories เดิม 
     const acc = product.accessories ? product.accessories.split(",").map(a => a.trim()) : []
     setSelectAccessories(acc)
 

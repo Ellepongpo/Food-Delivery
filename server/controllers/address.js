@@ -22,7 +22,7 @@ export const addAddress = async (req, res) => {
 
 //โชว์ที่อยู่จัดส่งทั้งหมด
 export const listAddress = async (req, res) => {
-    const { customer_id } = req.body
+    const { customer_id } = req.query
     //console.log(customer_id)
     try {
         const [address] = await db.query(
@@ -65,7 +65,7 @@ export const addDefaultAddress = async (req, res) => {
 
 //โชว์ ที่อยู่หลัก หน้า profile
 export const defaultAddress = async (req, res) => {
-    const { customer_id } = req.body
+    const { customer_id } = req.query
 
     try {
         const [defaultAddress] = await db.query(

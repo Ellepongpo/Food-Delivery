@@ -209,11 +209,11 @@ export const getOrderById = async (req, res) => {
             from Orders o
             join Employee e on o.deliveryBy = e.employee_id
             where order_id = ?
-            `,[order_id]
+            `, [order_id]
         )
 
         res.status(201).json({
-            products: products, accessories: accessories, customer: customer , rider:rider
+            products: products, accessories: accessories, customer: customer, rider: rider
         })
     } catch (err) {
         res.status(500).json({ message: "server error" })
@@ -289,7 +289,7 @@ export const updateOrderStatus = async (req, res) => {
         await db.beginTransaction();
 
         switch (order_status) {
-            //manager
+            //manager approve cancel
             case "Canceled_Refunded":
                 await db.query(
                     `
@@ -302,8 +302,56 @@ export const updateOrderStatus = async (req, res) => {
                     `,
                     [employee_id, order_status, order_id]
                 )
+
+
+                // คืน stock product
+                const [order_product] = await db.query(
+                    `
+                    select 
+                        op.product_id,
+                        op.order_product_qty
+                    from Order_Product op
+                    where op.order_id = ?
+                    `, [order_id]
+                )
+                //update product
+                for(const item of order_product){
+                    await db.query(
+                        `
+                        update Product
+                        set 
+                            stock_qty_product = stock_qty_product + ?
+                        where product_id = ?
+                        `, [item.order_product_qty , item.product_id]
+                    )
+                }
+
+
+                //คืน stock order_accessories
+                const [order_accessories] = await db.query(
+                    `
+                    select
+                        oa.accessories_name,
+                        oa.order_access_qty
+                    from Order_Accessories oa
+                    where oa.order_id = ?
+                    `, [order_id]
+                )
+                //update accessories
+                for(const item of order_accessories){
+                    await db.query(
+                        `
+                        update Accessories
+                        set 
+                            stock_qty_accessories = stock_qty_accessories + ?
+                        where accessories_name = ?
+                        `, [item.order_access_qty , item.accessories_name]
+                    )
+                }
+
                 break
-            //rider
+
+            //rider delivery
             case "Delivery":
                 await db.query(
                     `

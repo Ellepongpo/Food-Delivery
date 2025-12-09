@@ -13,7 +13,7 @@ const Employee = () => {
 
     const hdlFetchEmployee = async () => {
         try {
-            const res = await axios.post('http://localhost:3000/api/listEmployee')
+            const res = await axios.get('http://localhost:3000/api/listEmployee')
             //console.log(res.data)
             setListEmployee(res.data.employee)
         } catch (err) {
@@ -62,9 +62,6 @@ const Employee = () => {
                                                     <Pencil />
                                                 </button>
 
-                                                <button className="bg-red-500 px-6 py-1 text-white hover:bg-red-700 rounded-md cursor-pointer">
-                                                    <Trash2 />
-                                                </button>
                                             </div>
                                         </td>
                                     </tr>

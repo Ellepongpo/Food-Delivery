@@ -37,7 +37,9 @@ import CancelOrder from '../page/employee/orders/CancelOrder'
 import UpdateOrder from '../page/employee/orders/UpdateOrder'
 import Employee from '../page/employee/info/Employee'
 import EditEmployee from '../page/employee/info/EditEmployee'
-import SalePerDay from '../page/employee/summary-report/SalePerDay'
+import Summary from '../page/employee/summary-report/Summary'
+import ShowSalePerDay from '../page/employee/summary-report/ShowSalePerDay'
+import ShowCustomerTopPerMonth from '../page/employee/summary-report/ShowCustomerTopPerMonth'
 
 
 
@@ -81,7 +83,9 @@ const router = createBrowserRouter([
             { path: 'signup', element: <SignUpEmployee /> },
             { path: 'listEmployee', element: <Employee /> },
             { path: 'editEmployee', element: <EditEmployee /> },
-            { path: 'salePerDay', element: <SalePerDay /> },
+            { path: 'summary', element: <Summary /> },
+            { path: 'showSalePerDay', element: <ShowSalePerDay /> },
+            { path: 'showCustomerTopPerMonth', element: <ShowCustomerTopPerMonth /> },
         ]
     },
     //หน้าของ customer

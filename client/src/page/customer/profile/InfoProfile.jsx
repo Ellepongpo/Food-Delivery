@@ -16,7 +16,7 @@ const InfoProfile = () => {
 
     const showDefaultAddress = async () => {
         try {
-            const res = await axios.post('http://localhost:3000/api/defaultAddress', { customer_id: customer.id })
+            const res = await axios.get('http://localhost:3000/api/defaultAddress', {params : {customer_id : customer.id}})
             setDefaultAddress(res.data.defaultAddress)
             //console.log(defaultAddress)
         } catch (err) {

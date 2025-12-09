@@ -5,10 +5,10 @@ const router = express.Router()
 
 //endpoint http://localhost:3000/api/address
 router.post('/addAddress', addAddress)
-router.post('/address', listAddress)
+router.get('/address', listAddress)
 router.post('/editAddress' , editAddress)
 
 router.post('/addDefaultAddress', addDefaultAddress)
-router.post('/defaultAddress' , defaultAddress)
+router.get('/defaultAddress' , defaultAddress)
 
 export default router

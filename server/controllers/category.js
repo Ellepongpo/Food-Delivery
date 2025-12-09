@@ -1,6 +1,6 @@
 import { db } from '../db.js'
 
-// เพิ่มหมวดหมู่สินค้า
+// เพิ่มประเภทสินค้า
 export const addCategory = async (req, res) => {
 
     const { category_name, status, createBy } = req.body
@@ -28,7 +28,7 @@ export const addCategory = async (req, res) => {
     }
 }
 
-//โชว์ หมวดหมู่ สินค้าทั้งหมก
+//โชว์ ประเภท สินค้าทั้งหมด
 export const listCategory = async (req, res) => {
 
     try {
@@ -43,13 +43,12 @@ export const listCategory = async (req, res) => {
     }
 }
 
+//แก้ไขประเภทสินค้า
 export const editCategory = async (req, res) => {
     const { category_id, category_name, employee_id, status } = req.body
     try {
 
         await db.beginTransaction()
-
-        //const category_image = `/uploads/${req.file.filename}`
 
         //เอา category เดิม
         const [result] = await db.query(
@@ -60,7 +59,7 @@ export const editCategory = async (req, res) => {
 
         const old = result[0]
 
-        // ถ้าไม่มีไฟล์ใหม่ -> ใช้รูปเดิม
+        // ถ้าไม่มีไฟล์ใหม่ ใช้รูปเดิม
         let category_image = old.category_image
         if (req.file) {
             category_image = `/uploads/${req.file.filename}`
