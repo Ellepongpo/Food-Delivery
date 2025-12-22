@@ -30,7 +30,6 @@ const SignUp = () => {
     e.preventDefault() //ป้องกันการรีเฟรชหน้า เมื่อมีการ submit
     //console.log(form)
 
-    //send to backend
     try {
       const res = await axios.post('http://localhost:3000/api/signUp', form)
       console.log(res)

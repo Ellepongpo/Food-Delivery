@@ -26,11 +26,11 @@ const Login = () => {
     //send to back
     try{
       const res = await actionLogin(login)
-      navigate('/customer/profile/address')
       toast.success(res.data.message)
+      navigate('/customer/profile/address')
     }catch(err){
-      const errMsg = err.response?.data?.message
-      toast.error(errMsg)
+      console.log(err)
+      toast.error(err.response?.data?.message)
     }
   }
   

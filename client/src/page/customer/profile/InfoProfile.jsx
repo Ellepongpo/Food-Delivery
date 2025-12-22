@@ -104,7 +104,7 @@ const InfoProfile = () => {
                         <MapPinned />
                     </div>
 
-                    {
+                    {defaultAddress.length > 0 ? (                    
                         defaultAddress.map((item) => (
                             <div key={item.address_id} className="flex gap-2">
                                 <span>{item.house_no}</span>
@@ -115,7 +115,15 @@ const InfoProfile = () => {
                                 <span>{item.phone}</span>
                             </div>
                         ))
-                    }
+                    ) : (
+                        <span className="ml-4 text-red-500">
+                            ยังไม่มีที่อยู่สำหรับจัดส่ง
+                        </span>
+                    )} 
+
+
+
+                    
 
                 </div>
             </div>

@@ -21,15 +21,15 @@ const LoginEmployee = () => {
   }
 
   const hdlSubmit = async (e) => {
-    e.preventDefault() //ป้องกันรีเฟรซหน้าเมื่อกดปุ่ม submit
-    //send to back
+    e.preventDefault()
+  
     try{
       const res = await actionLogin(login)
       navigate('/employee')
       toast.success(res.data.message)
     }catch(err){
-      const errMsg = err.response?.data?.message
-      toast.error(errMsg)
+      console.log(err)
+      toast.error(err.response?.data?.message)
     }
   }
 

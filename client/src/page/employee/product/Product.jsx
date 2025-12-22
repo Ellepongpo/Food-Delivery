@@ -36,8 +36,7 @@ const Product = () => {
         </div>
 
         <div>
-          <button className='border border-blue-500 hover:bg-blue-500 px-6 p-2 rounded-md text-blue-500
-            hover:text-white cursor-pointer flex'
+          <button className='bg-blue-500 px-6 p-2 rounded-md text-white cursor-pointer flex hover:bg-blue-700'
             onClick={() => navigate('/employee/addProduct')}
           >
             <Plus className='mr-2' />

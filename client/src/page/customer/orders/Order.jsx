@@ -26,7 +26,7 @@ const Order = () => {
 
   const hdlDefaultAddress = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/defaultAddress', { params : {customer_id : customer_id} })
+      const res = await axios.get('http://localhost:3000/api/defaultAddress', { params: { customer_id: customer_id } })
       setAddress(res.data.defaultAddress)
     } catch (err) {
       console.log(err)
@@ -102,7 +102,7 @@ const Order = () => {
             <MapPinned />
           </div>
 
-          {
+          {address.length > 0 ? (
             address.map((item) => (
               <div className='flex flex-row gap-2 items-center' key={item.address_id}>
                 <span>{item.house_no}</span>
@@ -113,7 +113,12 @@ const Order = () => {
                 <span>{item.phone}</span>
               </div>
             ))
-          }
+          ) : (
+            <span className='text-red-500 mt-3'>
+              ยังไม่มีที่อยู่สำหรับจัดส่ง
+            </span>
+          )}
+
         </div>
       </div>
 
@@ -228,7 +233,7 @@ const Order = () => {
             </Link>
 
             <button className='bg-blue-500 text-white px-12 py-2 hover:bg-blue-700
-            cursor-pointer rounded-md' onClick={()=> setPayment(true)}>
+            cursor-pointer rounded-md' onClick={() => setPayment(true)}>
               สั่งซื้อ
             </button>
           </div>
@@ -280,7 +285,7 @@ const Order = () => {
               </div>
 
               <div className='flex  justify-center w-full mt-8'>
-                <button className='bg-gray-400 px-6 py-2 mr-2 text-white hover:bg-gray-500 rounded-md cursor-pointer' onClick={()=> setPayment(false)}>
+                <button className='bg-gray-400 px-6 py-2 mr-2 text-white hover:bg-gray-500 rounded-md cursor-pointer' onClick={() => setPayment(false)}>
                   ยกเลิก
                 </button>
                 <button className='bg-blue-500 px-4 text-white hover:bg-blue-600 rounded-md cursor-pointer' onClick={hdlOrder}>

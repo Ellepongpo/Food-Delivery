@@ -44,7 +44,7 @@ export const login = async (req, res) => {
     try {
         const [user] = await db.query('select * from Customer where email = ? and password = ?', [email, password])
 
-        if (!user[0]) {
+        if (user.length === 0) {
             return res.status(400).json({ message: "อีเมล์และรหัสผ่านไม่ถูกต้อง" })
         }
 
@@ -83,9 +83,9 @@ export const logout = async (req, res) => {
 
     try {
         await db.query(
-            `UPDATE Login 
-            SET dateTime_out = NOW() 
-            WHERE login_id = ? AND customer_id = ? AND dateTime_out is null`,
+            `update Login 
+            set dateTime_out = now() 
+            where login_id = ? and customer_id = ? and dateTime_out is null`,
             [login_id, customer_id]
         );
 
@@ -145,7 +145,7 @@ export const loginEmployee = async (req, res) => {
             [email, password]
         )
 
-        if (!emp[0]) {
+        if (emp.length === 0) {
             res.status(400).json({ message: "อีเมล์และรหัสผ่านไม่ถูกต้อง" })
         }
 
@@ -179,9 +179,9 @@ export const logoutEmployee = async (req, res) => {
 
     try {
         await db.query(
-            `UPDATE Login 
-            SET dateTime_out = NOW() 
-            WHERE login_id = ? AND employee_id = ? AND dateTime_out is null`,
+            `update Login 
+            set dateTime_out = now() 
+            where login_id = ? and employee_id = ? and dateTime_out is null`,
             [login_id, employee_id]
         );
 

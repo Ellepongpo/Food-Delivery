@@ -53,7 +53,7 @@ export const addDefaultAddress = async (req, res) => {
         await db.query(
             `update Customer
             set isDefault_dateTime = now() , address_id = ?
-            where customer_id = ? `, [1, address_id, customer_id]
+            where customer_id = ? `, [address_id, customer_id]
         )
 
         res.status(201).json({ message: "ตั้งเป็นที่อยู่หลักเรียบร้อย" })
@@ -63,13 +63,13 @@ export const addDefaultAddress = async (req, res) => {
     }
 }
 
-//โชว์ ที่อยู่หลัก หน้า profile
+//โชว์ ที่อยู่หลักที่ลูกค้าเลือก
 export const defaultAddress = async (req, res) => {
     const { customer_id } = req.query
 
     try {
         const [defaultAddress] = await db.query(
-        `SELECT 
+        `select 
             c.address_id,
             ad.house_no,
             ad.sub_district,
@@ -77,9 +77,9 @@ export const defaultAddress = async (req, res) => {
             ad.province,
             ad.zip_code,
             ad.phone
-        FROM Customer c
-        LEFT JOIN Address_Delivery ad ON c.address_id = ad.address_id
-        WHERE c.customer_id = ?` ,[customer_id]
+        from Customer c
+        join Address_Delivery ad on c.address_id = ad.address_id
+        where c.customer_id = ?` ,[customer_id]
         )
 
         res.status(201).json({defaultAddress:defaultAddress})

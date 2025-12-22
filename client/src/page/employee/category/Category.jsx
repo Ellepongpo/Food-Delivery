@@ -42,10 +42,7 @@ const Category = () => {
         </div>
 
         <div className="mr-6">
-          <button className="w-full px-4 py-3 rounded-xl
-          border border-blue-500 text-blue-600
-          font-semibold hover:bg-blue-500 hover:text-white
-          transition-all duration-200 flex cursor-pointer"
+          <button className="w-full px-4 py-3 rounded-xl text-white bg-blue-500 flex cursor-pointer hover:bg-blue-700"
             onClick={addCategory}>
             <Plus className="mr-2" />
             Add Category

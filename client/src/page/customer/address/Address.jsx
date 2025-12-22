@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useDeliveryStore from "../../../store/Customer-store"
-import { MapPinned, Pencil, Trash2, CirclePlus } from 'lucide-react';
+import { MapPinned, Pencil, Trash2, CirclePlus } from 'lucide-react'
 
 const Address = () => {
   const customer_id = useDeliveryStore((state) => state.customer.id)
@@ -45,6 +45,7 @@ const Address = () => {
           </Link>
         </div>
       </div>
+      
       {
         address.map((item) => (
           <div className="w-4xl ml-4 border h-24 border-gray-300 rounded-md mb-1" key={item.address_id}>

@@ -19,8 +19,7 @@ const EditAddress = () => {
   })
 
   useEffect(() => {
-    if(!address) return
-
+    
     setForm({
       address_id: address.address_id,
       house_no: address.house_no,

@@ -94,14 +94,14 @@ const EditProduct = () => {
 
     if (selectAccessories.includes(value)) {
       // ถ้ามีอยู่แล้ว  เอาออก
-      newValues = selectAccessories.filter((x) => x !== value);
+      newValues = selectAccessories.filter((x) => x !== value)
     } else {
       // ถ้ายังไม่มี  เพิ่มเข้า array
-      newValues = [...selectAccessories, value];
+      newValues = [...selectAccessories, value]
     }
 
     setSelectAccessories(newValues);
-    console.log("select accessories", newValues);
+    console.log("select accessories", newValues)
   }
 
   

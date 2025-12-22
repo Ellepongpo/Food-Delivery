@@ -29,10 +29,9 @@ const SignUpEmployee = () => {
   }
 
   const hdlSubmit = async (e) => {
-    e.preventDefault() //ป้องกันการรีเฟรชหน้า เมื่อมีการ submit
-    console.log(form)
+    e.preventDefault()
+    //console.log(form)
 
-    //send to backend
     try {
       const res = await axios.post('http://localhost:3000/api/signUpEmployee', form)
       console.log(res)

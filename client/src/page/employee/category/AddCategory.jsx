@@ -50,7 +50,7 @@ const AddCategory = () => {
             toast.success(res.data.message)
 
         } catch (err) {
-            //console.log(err)
+            console.log(err)
             toast.error(err.response.data.message)
         }
     }
@@ -140,20 +140,3 @@ const AddCategory = () => {
 }
 
 export default AddCategory
-
-
-
-// Swal.fire({
-//     title: 'บันทึกสำเร็จ!',
-//     text: res.data.message,
-//     icon: 'success',
-//     confirmButtonColor: '#3085d6',
-//     confirmButtonText: 'ตกลง'
-// })
-
-// Swal.fire({
-//     title: 'เกิดข้อผิดพลาด!',
-//     text: err.response.data.message,
-//     icon: 'error',
-//     confirmButtonText: 'ตกลง'
-// })

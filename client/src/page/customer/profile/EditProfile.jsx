@@ -2,11 +2,11 @@ import { useEffect, useState } from "react"
 import useDeliveryStore from "../../../store/Customer-store"
 import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios"
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const EditProfile = () => {
   const customer = useDeliveryStore((state) => state.customer)
-  const setCustomer = useDeliveryStore((state)=> state.setCustomer)
+  const setCustomer = useDeliveryStore((state) => state.setCustomer)
   const navigate = useNavigate()
   //console.log(customer)
   const [form, setForm] = useState({
@@ -26,23 +26,22 @@ const EditProfile = () => {
   })
 
   useEffect(() => {
-    if (customer) {
-      setForm({
-        customer_id: customer.id,
-        first_name: customer.first_name,
-        last_name: customer.last_name,
-        birthday: customer.birthday,
-        email: customer.email,
-        password: customer.password,
-        house_no: customer.house_no,
-        sub_district: customer.sub_district,
-        district: customer.district,
-        province: customer.province,
-        zip_code: customer.zip_code,
-        phone: customer.phone,
-        gender: customer.gender
-      })
-    }
+    
+    setForm({
+      customer_id: customer.id,
+      first_name: customer.first_name,
+      last_name: customer.last_name,
+      birthday: customer.birthday,
+      email: customer.email,
+      password: customer.password,
+      house_no: customer.house_no,
+      sub_district: customer.sub_district,
+      district: customer.district,
+      province: customer.province,
+      zip_code: customer.zip_code,
+      phone: customer.phone,
+      gender: customer.gender
+    })
   }, [customer])
 
   const hdlOnChange = (e) => {
@@ -54,13 +53,13 @@ const EditProfile = () => {
   const hdlSubmit = async (e) => {
     e.preventDefault()
 
-    try{
+    try {
       const res = await axios.post('http://localhost:3000/api/editCustomer', form)
       toast.success(res.data.message)
       //set ที่ global state
       setCustomer(res.data.customer)
       navigate('/customer/profile')
-    }catch(err){
+    } catch (err) {
       console.log(err)
       toast.error(err.response.data.message)
     }

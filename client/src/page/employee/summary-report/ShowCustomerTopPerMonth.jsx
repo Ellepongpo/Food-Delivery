@@ -4,7 +4,7 @@ const ShowCustomerTopPerMonth = () => {
     const location = useLocation()
     const result = location?.state?.result
 
-    console.log(result)
+    //console.log(result)
 
 
     return (
@@ -32,7 +32,7 @@ const ShowCustomerTopPerMonth = () => {
                                 </tr>
                             ) : (
                                 result.map((item)=> (
-                                    <tr key={item.customer_id} className="hover:bg-gray-50">
+                                    <tr key={`${item.customer_id}-${item.create_dateTime}`} className="hover:bg-gray-50">
                                         <td className="p-4">{item.full_name}</td>
                                         <td className="p-4">{item.create_dateTime}</td>
                                         <td className="p-4">{item.total_spent}฿</td>
