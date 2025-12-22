@@ -59,6 +59,31 @@ const router = createBrowserRouter([
             { path: 'signup', element: <SignUp /> }
         ]
     },
+
+    //หน้าของ customer
+    {
+        path: '/customer',
+        element: <ProtectCustomer element={<LayOutCTM />} />,
+        children: [
+            { index: true, element: <Home /> },
+            { path: 'cart', element: <Cart/> },
+            { path: 'menu', element: <Menu /> },
+            { path: 'order', element: <Order /> },
+            { path: 'detailProduct/:id', element: <DetailProduct /> },
+            { path: 'profile', element: <Profile />,
+                children:[
+                    { index: true, element: <InfoProfile /> },
+                    { path: 'editProfile', element: <EditProfile /> },
+                    { path: 'address', element: <Address /> },
+                    { path: 'editAddress', element: <EditAddress /> },
+                    { path: 'addAddress', element: <AddAddress /> },
+                    { path: 'defaultAddress', element: <DefaultAddress />},
+                    { path: 'showOrders', element: <ShowOrders />},
+                    { path: 'detailOrder/:order_id', element: <DetailOrder />}
+                ]
+             },
+        ]
+    },
     
     //หน้าของ employee
     { path: '/employee/login', element: <LoginEmployee /> },
@@ -87,33 +112,7 @@ const router = createBrowserRouter([
             { path: 'showSalePerDay', element: <ShowSalePerDay /> },
             { path: 'showCustomerTopPerMonth', element: <ShowCustomerTopPerMonth /> },
         ]
-    },
-    //หน้าของ customer
-    {
-        path: '/customer',
-        // protect เป็นทางผ่าน
-        element: <ProtectCustomer element={<LayOutCTM />} />,
-        children: [
-            { index: true, element: <Home /> },
-            { path: 'cart', element: <Cart/> },
-            { path: 'menu', element: <Menu /> },
-            { path: 'order', element: <Order /> },
-            { path: 'detailProduct/:id', element: <DetailProduct /> },
-            { path: 'profile', element: <Profile />,
-                children:[
-                    { index: true, element: <InfoProfile /> },
-                    { path: 'editProfile', element: <EditProfile /> },
-                    { path: 'address', element: <Address /> },
-                    { path: 'editAddress', element: <EditAddress /> },
-                    { path: 'addAddress', element: <AddAddress /> },
-                    { path: 'defaultAddress', element: <DefaultAddress />},
-                    { path: 'showOrders', element: <ShowOrders />},
-                    { path: 'detailOrder/:order_id', element: <DetailOrder />}
-                ]
-             },
-        ]
     }
-
 ])
 
 const AppRoutes = () => {
