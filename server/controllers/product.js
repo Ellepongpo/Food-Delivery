@@ -17,7 +17,7 @@ export const addProduct = async (req, res) => {
         )
 
         if (checkProduct[0]) {
-            return res.status(401).json({ message: "มีสินค้านี้ในระบบแล้ว" })
+            return res.status(400).json({ message: "มีสินค้านี้ในระบบแล้ว" })
         }
 
         //insert to product
@@ -85,7 +85,7 @@ export const searchProduct = async (req, res) => {
                 GROUP BY p.product_id`
                 , [id]
             )
-            res.status(201).json({ product: result })
+            res.status(200).json({ product: result })
         }
 
     } catch (err) {
@@ -115,7 +115,7 @@ export const listProduct = async (req, res) => {
             LEFT JOIN Product_Accessories pa ON p.product_id = pa.product_id
             GROUP BY p.product_id`
         )
-        res.status(201).json({ product: product })
+        res.status(200).json({ product: product })
 
     } catch (err) {
         res.status(500).json({ message: "server error" })
@@ -220,7 +220,7 @@ export const editProduct = async (req, res) => {
 
 
         await db.commit()
-        res.status(201).json({ message: "แก้ไขข้อมูลสินค้าเรียบร้อย" })
+        res.status(200).json({ message: "แก้ไขข้อมูลสินค้าเรียบร้อย" })
     } catch (err) {
         await db.rollback()
         console.log(err)

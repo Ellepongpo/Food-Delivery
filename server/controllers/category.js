@@ -16,8 +16,8 @@ export const addCategory = async (req, res) => {
         }
 
         await db.query(
-            `INSERT INTO Category (category_name, category_image, status, add_dateTime, createBy)
-            VALUES (?, ?, ?, NOW(), ?)`,
+            `insert into Category (category_name, category_image, status, add_dateTime, createBy)
+            values (?, ?, ?, now(), ?)`,
             [category_name, category_image, status, createBy]
         )
 
@@ -35,7 +35,7 @@ export const listCategory = async (req, res) => {
         const [category] = await db.query(
             `select * from Category`
         )
-        res.status(201).json({ category })
+        res.status(200).json({ category })
         console.log({ category: category })
     } catch (err) {
         console.log(err)
@@ -106,7 +106,7 @@ export const editCategory = async (req, res) => {
 
 
         await db.commit()
-        res.status(201).json({ message: "แก้ไขหมวดหมู่เรียบร้อยแล้ว" })
+        res.status(200).json({ message: "แก้ไขหมวดหมู่เรียบร้อยแล้ว" })
     } catch (err) {
         await db.rollback()
         console.log(err)

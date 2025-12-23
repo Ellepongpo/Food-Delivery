@@ -145,7 +145,7 @@ export const listOrders = async (req, res) => {
             `, [customer_id]
         )
 
-        res.status(201).json({ orders: orders })
+        res.status(200).json({ orders: orders })
     } catch (err) {
         res.status(500).json({ message: "server error" })
     }
@@ -212,7 +212,7 @@ export const getOrderById = async (req, res) => {
             `, [order_id]
         )
 
-        res.status(201).json({
+        res.status(200).json({
             products: products, accessories: accessories, customer: customer, rider: rider
         })
     } catch (err) {

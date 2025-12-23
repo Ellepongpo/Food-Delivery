@@ -5,7 +5,7 @@ const router = expreess.Router()
 
 //endpoint http://localhost:3000/api/employee
 
-router.get('/listEmployee' , listEmployee)
-router.post('/editEmployee' , editEmployee)
+router.get('/api/listEmployee' , listEmployee)
+router.post('/api/editEmployee' , editEmployee)
 
 export default router

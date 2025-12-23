@@ -22,8 +22,8 @@ const Login = () => {
   }
 
   const hdlSubmit = async (e) => {
-    e.preventDefault() //ป้องกันรีเฟรซหน้าเมื่อกดปุ่ม submit
-    //send to back
+    e.preventDefault()
+    
     try{
       const res = await actionLogin(login)
       toast.success(res.data.message)

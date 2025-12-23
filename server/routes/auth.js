@@ -7,14 +7,14 @@ const router = express.Router()
 //endpoint http://localhost:3000/api/
 
 //customer
-router.post('/signUp' , signUp)
-router.post('/login', login)
-router.post('/logout',logout)
+router.post('/api/signUp' , signUp)
+router.post('/api/login', login)
+router.post('/api/logout',logout)
 
 //employee
-router.post('/loginEmployee', loginEmployee)
-router.post('/logoutEmployee', logoutEmployee)
-router.post('/signUpEmployee', signUpEmployee)
+router.post('/api/loginEmployee', loginEmployee)
+router.post('/api/logoutEmployee', logoutEmployee)
+router.post('/api/signUpEmployee', signUpEmployee)
 
 
 export default router

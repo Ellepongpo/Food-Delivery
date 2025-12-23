@@ -34,7 +34,7 @@ const SignUpEmployee = () => {
 
     try {
       const res = await axios.post('http://localhost:3000/api/signUpEmployee', form)
-      console.log(res)
+      //console.log(res)
       toast.success(res.data.message)
     } catch (err) {
       console.log(err)

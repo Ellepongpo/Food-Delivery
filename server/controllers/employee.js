@@ -8,7 +8,7 @@ export const listEmployee = async (req, res) => {
             `
         )
 
-        res.status(201).json({ employee: employee })
+        res.status(200).json({ employee: employee })
     } catch (err) {
         console.log(err)
         res.status(500).json({ message: "server error" })
@@ -51,13 +51,16 @@ export const editEmployee = async (req, res) => {
             `,[email , password , employee_id]
         )
 
-        if(check.length > 0){
-            if(check[0].email === email && check[0].phone === phone){
-                return res.status(400).json({message: "อีเมล์และเบอร์โทรนี้มีผู้ใช้งานแล้ว"})
-            }else if(check[0].email === email){
-                return res.status(400).json({message: "อีเมล์นี้มีผู้ใช้งานแล้ว"})
-            }else if(check[0].phone === phone){
-                return res.status(400).json({message: "เบอร์โทรนี้มีผู้ใช้งานแล้ว"})
+        if (check.length > 0) {
+            const emailDup = check.some((r) => r.email === email)
+            const phoneDup = check.some((r) => r.phone === phone)
+            
+            if (emailDup && phoneDup) {
+                return res.status(409).json({ message: "อีเมล์และเบอร์โทรนี้มีผู้ใช้งานแล้ว" })
+            } else if (emailDup) {
+                return res.status(409).json({ message: "อีเมล์นี้มีผู้ใช้งานแล้ว" })
+            } else {
+                return res.status(409).json({ message: "เบอร์โทรนี้มีผู้ใช้งานแล้ว" })
             }
         }
 
@@ -75,7 +78,7 @@ export const editEmployee = async (req, res) => {
         )
 
         await db.commit()
-        res.status(201).json({message: "แก้ไขข้อมูลพนักงานเรียบร้อยแล้ว"})
+        res.status(200).json({message: "แก้ไขข้อมูลพนักงานเรียบร้อยแล้ว"})
     } catch (err) {
         await db.rollback()
         console.log(err)

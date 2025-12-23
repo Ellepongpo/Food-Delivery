@@ -6,13 +6,13 @@ const router = express.Router()
 //endpoint http://localhost:3000/api/order
 
 //customer
-router.post('/addOrder', addOrder)
-router.post('/orders', listOrders)
-router.get('/orders/:order_id', getOrderById)
-router.post('/requestedCancel', requestedCancel)
+router.post('/api/addOrder', addOrder)
+router.post('/api/orders', listOrders)
+router.get('/api/orders/:order_id', getOrderById)
+router.post('/api/requestedCancel', requestedCancel)
 
 //employee
-router.post('/employee/orders' , orders)
-router.post('/employee/updateOrderStatus' , updateOrderStatus)
+router.post('/api/employee/orders' , orders)
+router.post('/api/employee/updateOrderStatus' , updateOrderStatus)
 
 export default router

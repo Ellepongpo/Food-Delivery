@@ -29,7 +29,7 @@ export const listAddress = async (req, res) => {
             `select * from Address_Delivery where customer_id = ?`, [customer_id]
         )
 
-        res.status(201).json({ address: address })
+        res.status(200).json({ address: address })
 
     } catch (err) {
         res.status(500).jsob({ message: "server error" })
@@ -82,7 +82,7 @@ export const defaultAddress = async (req, res) => {
         where c.customer_id = ?` ,[customer_id]
         )
 
-        res.status(201).json({defaultAddress:defaultAddress})
+        res.status(200).json({defaultAddress:defaultAddress})
 
     } catch (err) {
         res.status(500).json({ message: "server error" })

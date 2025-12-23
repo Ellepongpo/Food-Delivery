@@ -3,6 +3,6 @@ import { editCustomer } from '../controllers/customer.js'
 
 const router = express.Router()
 
-router.post('/editCustomer', editCustomer)
+router.post('/api/editCustomer', editCustomer)
 
 export default router

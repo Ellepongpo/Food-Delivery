@@ -39,13 +39,16 @@ export const editCustomer = async (req , res) => {
 
         )
 
-        if(check.length > 0){
-            if(check[0].email === email && check[0].phone === phone){
-                return res.status(400).json({message: "อีเมล์และเบอร์โทรนี้ มีผู้ใช้งานแล้ว"})
-            }else if(check[0].email === email){
-                return res.status(400).json({message: "อีเมล์นี้ มีผู้ใช้งานแล้ว"})
-            }else if(check[0].phone === phone){
-                return res.status(400).json({message: "เบอร์โททรนี้มีผู้ใช้งานแล้ว"})
+        if (check.length > 0) {
+            const emailDup = check.some((r) => r.email === email)
+            const phoneDup = check.some((r) => r.phone === phone)
+            
+            if (emailDup && phoneDup) {
+                return res.status(409).json({ message: "อีเมล์และเบอร์โทรนี้มีผู้ใช้งานแล้ว" })
+            } else if (emailDup) {
+                return res.status(409).json({ message: "อีเมล์นี้มีผู้ใช้งานแล้ว" })
+            } else {
+                return res.status(409).json({ message: "เบอร์โทรนี้มีผู้ใช้งานแล้ว" })
             }
         }
 
@@ -85,7 +88,7 @@ export const editCustomer = async (req , res) => {
 
         }
         await db.commit()
-        res.status(201).json({message: "แก้ไขข้อมูลส่วนตัวเรียบร้อย" , customer: customer})
+        res.status(200).json({message: "แก้ไขข้อมูลส่วนตัวเรียบร้อย" , customer: customer})
     }catch(err){
         await db.rollback()
         res.status(500).json({message:"server error"})

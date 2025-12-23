@@ -7,7 +7,7 @@ export const listAccessories = async (req , res) => {
             `select * from Accessories`
         )
 
-        res.status(201).json({accessories:accessories})
+        res.status(200).json({accessories:accessories})
 
     }catch(err){
         res.status(500).json({message:"server error"})
@@ -47,7 +47,7 @@ export const editAccessories = async (req , res)=> {
         )
 
         await db.commit()
-        res.status(201).json({message: "แก้ไขข้อมูลเรียบร้อยแล้ว"})
+        res.status(200).json({message: "แก้ไขข้อมูลเรียบร้อยแล้ว"})
     }catch(err){
         await db.rollback()
         console.log(err)

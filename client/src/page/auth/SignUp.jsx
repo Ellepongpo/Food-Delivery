@@ -32,7 +32,7 @@ const SignUp = () => {
 
     try {
       const res = await axios.post('http://localhost:3000/api/signUp', form)
-      console.log(res)
+      //console.log(res)
       toast.success(res.data.message)
       navigate('/login')
     } catch (err) {

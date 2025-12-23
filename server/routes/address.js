@@ -4,11 +4,11 @@ import { addAddress, addDefaultAddress, defaultAddress, editAddress, listAddress
 const router = express.Router()
 
 //endpoint http://localhost:3000/api/address
-router.get('/address', listAddress)
-router.post('/addAddress', addAddress)
-router.post('/editAddress' , editAddress)
+router.get('/api/address', listAddress)
+router.post('/api/addAddress', addAddress)
+router.post('/api/editAddress' , editAddress)
 
-router.post('/addDefaultAddress', addDefaultAddress)
-router.get('/defaultAddress' , defaultAddress)
+router.post('/api/addDefaultAddress', addDefaultAddress)
+router.get('/api/defaultAddress' , defaultAddress)
 
 export default router

@@ -13,15 +13,18 @@ export const signUp = async (req, res) => {
 
         //res กลับไปยังผู้ใช้งาน
         if (check.length > 0) {
-            if (check[0].email === email && check[0].phone === phone) {
+            const emailDup = check.some((r) => r.email === email)
+            const phoneDup = check.some((r) => r.phone === phone)
+
+            if (emailDup && phoneDup) {
                 return res.status(409).json({ message: "อีเมล์และเบอร์โทรนี้มีผู้ใช้งานแล้ว" })
-            } else if (check[0].email === email) {
+            } else if (emailDup) {
                 return res.status(409).json({ message: "อีเมล์นี้มีผู้ใช้งานแล้ว" })
             } else {
                 return res.status(409).json({ message: "เบอร์โทรนี้มีผู้ใช้งานแล้ว" })
             }
         }
-        
+
         //insert database
         await db.query(
             `insert into Customer 
@@ -102,7 +105,7 @@ export const signUpEmployee = async (req, res) => {
     const { first_name, last_name, birthday,
         email, password, house_no,
         sub_district, district, zip_code, province, position,
-        phone, gender , createBy} = req.body
+        phone, gender, createBy } = req.body
 
     try {
         //check email and phone
@@ -110,20 +113,24 @@ export const signUpEmployee = async (req, res) => {
 
         //res กลับไปยังผู้ใช้งาน
         if (check.length > 0) {
-            if (check[0].email === email && check[0].phone === phone) {
+            const emailDup = check.some((r) => r.email === email)
+            const phoneDup = check.some((r) => r.phone === phone)
+
+            if (emailDup && phoneDup) {
                 return res.status(409).json({ message: "อีเมล์และเบอร์โทรนี้มีผู้ใช้งานแล้ว" })
-            } else if (check[0].email === email) {
+            } else if (emailDup) {
                 return res.status(409).json({ message: "อีเมล์นี้มีผู้ใช้งานแล้ว" })
             } else {
                 return res.status(409).json({ message: "เบอร์โทรนี้มีผู้ใช้งานแล้ว" })
             }
         }
+
         //insert database
         await db.query(
             `insert into Employee 
                 (first_name,last_name,birthday,email,password,house_no,sub_district,district,province,zip_code,phone,gender,create_dateTime,position,createBy)
                 values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)`,
-            [first_name, last_name, birthday, email, password, house_no, sub_district, district, province, zip_code, phone, gender,position,createBy]
+            [first_name, last_name, birthday, email, password, house_no, sub_district, district, province, zip_code, phone, gender, position, createBy]
         )
 
         res.status(201).json({ message: "ลงทะเบียนพนักงานเรียบร้อย" })

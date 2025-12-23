@@ -5,7 +5,7 @@ const router = express.Router()
 
 //endpoint http://localhost:3000/api/summary
 
-router.get('/salePerDay' , salePerDay)
-router.get('/customerTopPerMonth' , customerTopPerMonth)
+router.get('/api/salePerDay' , salePerDay)
+router.get('/api/customerTopPerMonth' , customerTopPerMonth)
 
 export default router
