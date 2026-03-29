@@ -29,40 +29,34 @@ const EditCategory = () => {
         setImagePreview(`http://localhost:3000${category.category_image}`)
     }, [category])
 
-    
-    const hdlOnChange = (e) => {
-        setForm({
-            ...form, [e.target.name] : e.target.value
-        })
-    }
-    
+
     const handleImageChange = (e) => {
         //console.log(e)
         const file = e.target.files[0]
         if (!file) return
-            
+
         setImage(file)
         setImagePreview(URL.createObjectURL(file))
     }
 
 
-    const hdlOnSubmit = async (e)=> {
+    const hdlOnSubmit = async (e) => {
         e.preventDefault()
 
         const editCategory = new FormData()
         editCategory.append("category_id", form.category_id)
         editCategory.append("category_name", form.category_name)
         editCategory.append("employee_id", employee_id)
-        editCategory.append("status" , form.status)
-        if(image){
+        editCategory.append("status", form.status)
+        if (image) {
             editCategory.append("category_image", image)
         }
 
-        try{
+        try {
             const res = await axios.post('http://localhost:3000/api/editCategory', editCategory)
             toast.success(res.data.message)
             navigate('/employee/category')
-        }catch(err){
+        } catch (err) {
             console.log(err)
             toast.error(err.response.data.message)
         }
@@ -87,7 +81,7 @@ const EditCategory = () => {
                                 type='text'
                                 name='category_name'
                                 value={form.category_name}
-                                onChange={hdlOnChange}
+                                onChange={(e) => { setForm({ ...form, category_name: e.target.value }) }}
                             />
                         </div>
 
@@ -109,7 +103,7 @@ const EditCategory = () => {
                                         type="radio"
                                         value="IsActive"
                                         checked={form.status === "IsActive"}
-                                        onChange={hdlOnChange}
+                                        onChange={(e) => { setForm({ ...form, status: e.target.value }) }}
                                     />
                                     <span>IsActive</span>
                                 </label>
@@ -119,7 +113,7 @@ const EditCategory = () => {
                                         type="radio"
                                         value="InActive"
                                         checked={form.status === "InActive"}
-                                        onChange={hdlOnChange}
+                                        onChange={(e) => { setForm({ ...form, status: e.target.value }) }}
                                     />
                                     <span>InActive</span>
                                 </label>
@@ -140,16 +134,14 @@ const EditCategory = () => {
 
                         <div className="flex">
                             <button className="w-full border-blue-500 bg-blue-500 m-4 p-2 rounded-md
-                             text-white hover:bg-blue-700 cursor-pointer"
-                            >
+                             text-white hover:bg-blue-700 cursor-pointer">
                                 Edit
                             </button>
 
                             <button className="w-full border-red-500 bg-red-500 m-4 p-2 rounded-md
                              text-white hover:bg-red-700 cursor-pointer"
                                 type="button"
-                                onClick={() => navigate('/employee/category')}
-                            >
+                                onClick={() => navigate('/employee/category')}>
                                 Back
                             </button>
                         </div>

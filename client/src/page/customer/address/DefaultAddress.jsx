@@ -2,7 +2,6 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import useDeliveryStore from "../../../store/Customer-store"
 import { toast } from "react-toastify"
-import { MapPinned } from 'lucide-react';
 
 const DefaultAddress = () => {
   const customer_id = useDeliveryStore((state) => state.customer.id)

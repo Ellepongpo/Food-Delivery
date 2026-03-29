@@ -14,13 +14,6 @@ const Login = () => {
     password: ""
   })
 
-  const hdlOnChange = (e) => {
-    setLogin({
-      ...login, [e.target.name]: e.target.value
-    })
-    //console.log(login)
-  }
-
   const hdlSubmit = async (e) => {
     e.preventDefault()
     
@@ -53,7 +46,7 @@ const Login = () => {
                 name='email'
                 type="email"
                 required
-                onChange={hdlOnChange}
+                onChange={(e)=> {setLogin({...login, email: e.target.value})}}
               />
             </div>
 
@@ -63,7 +56,7 @@ const Login = () => {
                 name='password'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e)=> {setLogin({...login, password: e.target.value})}}
               />
             </div>
 

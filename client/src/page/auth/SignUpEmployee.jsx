@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import useEmployeeStore from '../../store/Employee-store';
+import { SendToBack } from 'lucide-react';
 
 const SignUpEmployee = () => {
   const employee = useEmployeeStore((state) => state.employee)
@@ -21,12 +22,6 @@ const SignUpEmployee = () => {
     gender: "",
     createBy: employee.id
   })
-
-  const hdlOnChange = (e) => {
-    setForm({
-      ...form, [e.target.name]: e.target.value
-    })
-  }
 
   const hdlSubmit = async (e) => {
     e.preventDefault()
@@ -65,7 +60,7 @@ const SignUpEmployee = () => {
                 name='first_name'
                 type='text'
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, first_name: e.target.value }) }}
               />
             </div>
 
@@ -75,7 +70,7 @@ const SignUpEmployee = () => {
                 name='last_name'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, last_name: e.target.value }) }}
               />
             </div>
           </div>
@@ -88,7 +83,7 @@ const SignUpEmployee = () => {
                 name='birthday'
                 type="date"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, birthday: e.target.value }) }}
               />
             </div>
 
@@ -98,7 +93,7 @@ const SignUpEmployee = () => {
                 name='email'
                 type="email"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, email: e.target.value }) }}
               />
             </div>
           </div>
@@ -111,7 +106,7 @@ const SignUpEmployee = () => {
                 name='password'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, password: e.target.value }) }}
               />
             </div>
 
@@ -121,7 +116,7 @@ const SignUpEmployee = () => {
                 name='house_no'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, house_no: e.target.value }) }}
               />
             </div>
           </div>
@@ -134,7 +129,7 @@ const SignUpEmployee = () => {
                 name='sub_district'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, sub_district: e.target.value }) }}
               />
             </div>
 
@@ -144,7 +139,7 @@ const SignUpEmployee = () => {
                 name='district'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, district: e.target.value }) }}
               />
             </div>
           </div>
@@ -157,7 +152,7 @@ const SignUpEmployee = () => {
                 name='province'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, province: e.target.value }) }}
               />
             </div>
 
@@ -167,7 +162,7 @@ const SignUpEmployee = () => {
                 name='zip_code'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, zip_code: e.target.value }) }}
               />
             </div>
           </div>
@@ -175,7 +170,8 @@ const SignUpEmployee = () => {
           <div className='grid gird-cols-1 md:grid-cols-2 gap-4'>
             <div>
               <label className='block text-sm font-medium text-gray-700'>ตำแหน่ง (position)</label>
-              <select name="position" onChange={hdlOnChange} required className='border w-full border-gray-300 rounded-md p-1'>
+              <select name="position" onChange={(e) => { setForm({ ...form, position: e.target.value }) }}
+                required className='border w-full border-gray-300 rounded-md p-1'>
                 <option value="">--- เลือกตำแหน่ง ---</option>
                 <option value="Manager">Manager</option>
                 <option value="Staff">Staff</option>
@@ -192,7 +188,7 @@ const SignUpEmployee = () => {
                 name='phone'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e)=> {setForm({...form, phone: e.target.value})}}
               />
             </div>
 
@@ -205,7 +201,7 @@ const SignUpEmployee = () => {
                     type="radio"
                     value="Male"
                     required
-                    onChange={hdlOnChange}
+                    onChange={(e)=> {setForm({...form, gender: e.target.value})}}
                   />
                   <span>ชาย (male)</span>
                 </label>
@@ -215,7 +211,7 @@ const SignUpEmployee = () => {
                     type="radio"
                     value="Female"
                     required
-                    onChange={hdlOnChange} />
+                    onChange={(e)=> {setForm({...form, gender: e.target.value})}} />
                   <span>หญิง (female)</span>
                 </label>
               </div>

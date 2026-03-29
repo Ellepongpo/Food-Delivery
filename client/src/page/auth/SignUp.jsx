@@ -20,11 +20,6 @@ const SignUp = () => {
     gender: ""
   })
 
-  const hdlOnChange = (e) => {
-    setForm({
-      ...form, [e.target.name]: e.target.value
-    })
-  }
 
   const hdlSubmit = async (e) => {
     e.preventDefault() //ป้องกันการรีเฟรชหน้า เมื่อมีการ submit
@@ -63,7 +58,7 @@ const SignUp = () => {
                 name='first_name'
                 type='text'
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, first_name: e.target.value }) }}
               />
             </div>
 
@@ -73,7 +68,7 @@ const SignUp = () => {
                 name='last_name'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, last_name: e.target.value }) }}
               />
             </div>
           </div>
@@ -86,7 +81,7 @@ const SignUp = () => {
                 name='birthday'
                 type="date"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, birthday: e.target.value }) }}
               />
             </div>
 
@@ -96,7 +91,7 @@ const SignUp = () => {
                 name='email'
                 type="email"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, email: e.target.value }) }}
               />
             </div>
           </div>
@@ -109,7 +104,7 @@ const SignUp = () => {
                 name='password'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, password: e.target.value }) }}
               />
             </div>
 
@@ -119,7 +114,7 @@ const SignUp = () => {
                 name='house_no'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, house_no: e.target.value }) }}
               />
             </div>
           </div>
@@ -132,7 +127,7 @@ const SignUp = () => {
                 name='sub_district'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, sub_district: e.target.value }) }}
               />
             </div>
 
@@ -142,7 +137,7 @@ const SignUp = () => {
                 name='district'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, district: e.target.value }) }}
               />
             </div>
           </div>
@@ -155,7 +150,7 @@ const SignUp = () => {
                 name='province'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, province: e.target.value }) }}
               />
             </div>
 
@@ -165,7 +160,7 @@ const SignUp = () => {
                 name='zip_code'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, zip_code: e.target.value }) }}
               />
             </div>
           </div>
@@ -178,7 +173,7 @@ const SignUp = () => {
                 name='phone'
                 type="text"
                 required
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, phone: e.target.value }) }}
               />
             </div>
 
@@ -191,7 +186,7 @@ const SignUp = () => {
                     type="radio"
                     value="Male"
                     required
-                    onChange={hdlOnChange} />
+                    onChange={(e) => { setForm({ ...form, gender: e.target.value }) }} />
                   <span>ชาย (male)</span>
                 </label>
                 <label className='inline-flex items-center gap-2'>
@@ -200,7 +195,7 @@ const SignUp = () => {
                     type="radio"
                     value="Female"
                     required
-                    onChange={hdlOnChange} />
+                    onChange={(e) => { setForm({ ...form, gender: e.target.value }) }} />
                   <span>หญิง (female)</span>
                 </label>
               </div>

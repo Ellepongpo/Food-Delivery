@@ -8,27 +8,27 @@ import { toast } from "react-toastify"
 const EditEmployee = () => {
   const location = useLocation()
   const employee = location?.state?.employee
-  const editBy = useEmployeeStore((state)=> state.employee.id)
+  const editBy = useEmployeeStore((state) => state.employee.id)
   const navigate = useNavigate()
 
   console.log(employee)
 
-  const [form , setForm] = useState({
+  const [form, setForm] = useState({
     employee_id: "",
-    first_name:"",
-    last_name:"",
-    email:"",
-    password:"",
-    house_no:"",
-    sub_district:"",
-    district:"",
-    province:"",
-    zip_code:"",
-    phone:"",
-    position:""
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    house_no: "",
+    sub_district: "",
+    district: "",
+    province: "",
+    zip_code: "",
+    phone: "",
+    position: ""
   })
 
-  useEffect(()=> {
+  useEffect(() => {
     setForm({
       employee_id: employee.employee_id,
       first_name: employee.first_name,
@@ -44,24 +44,17 @@ const EditEmployee = () => {
       position: employee.position,
       editBy: editBy
     })
-  },[])
-
-  const hdlOnChange = (e) => {
-    setForm({
-      ...form , [e.target.name]: e.target.value
-    })
-    //console.log(form)
-  }
+  }, [])
 
 
   const hdlOnSubmit = async (e) => {
     e.preventDefault()
 
-    try{
-      const res = await axios.post('http://localhost:3000/api/editEmployee' , form)
+    try {
+      const res = await axios.post('http://localhost:3000/api/editEmployee', form)
       toast.success(res.data.message)
       navigate('/employee/listEmployee')
-    }catch(err){
+    } catch (err) {
       console.log(err)
       toast.error(err.response.data.message)
     }
@@ -94,7 +87,7 @@ const EditEmployee = () => {
                     type="text"
                     name="first_name"
                     value={form.first_name}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, first_name: e.target.value }) }}
                   />
                 </div>
 
@@ -104,7 +97,7 @@ const EditEmployee = () => {
                     type="text"
                     name="last_name"
                     value={form.last_name}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, last_name: e.target.value }) }}
                   />
                 </div>
               </div>
@@ -126,7 +119,7 @@ const EditEmployee = () => {
                     type="email"
                     name="email"
                     value={form.email}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, email: e.target.value }) }}
                   />
                 </div>
               </div>
@@ -139,7 +132,7 @@ const EditEmployee = () => {
                     type="text"
                     name="password"
                     value={form.password}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, password: e.target.value }) }}
                   />
                 </div>
 
@@ -149,7 +142,7 @@ const EditEmployee = () => {
                     type="text"
                     name="phone"
                     value={form.phone}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, phone: e.target.value }) }}
                   />
                 </div>
               </div>
@@ -163,7 +156,7 @@ const EditEmployee = () => {
                     type="text"
                     name="house_no"
                     value={form.house_no}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, house_no: e.target.value }) }}
                   />
                 </div>
 
@@ -173,7 +166,7 @@ const EditEmployee = () => {
                     type="text"
                     name="sub_district"
                     value={form.sub_district}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, sub_district: e.target.value }) }}
                   />
                 </div>
               </div>
@@ -187,7 +180,7 @@ const EditEmployee = () => {
                     type="text"
                     name="district"
                     value={form.district}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, district: e.target.value }) }}
                   />
                 </div>
 
@@ -197,7 +190,7 @@ const EditEmployee = () => {
                     type="text"
                     name="province"
                     value={form.province}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, province: e.target.value }) }}
                   />
                 </div>
               </div>
@@ -211,7 +204,7 @@ const EditEmployee = () => {
                     type="text"
                     name="zip_code"
                     value={form.zip_code}
-                    onChange={hdlOnChange}
+                    onChange={(e) => { setForm({ ...form, zip_code: e.target.value }) }}
                   />
                 </div>
 
@@ -230,8 +223,8 @@ const EditEmployee = () => {
               <div className="space-y-2">
                 <div>
                   <label className="block text-sm text-gray-600">ตำแหน่ง (position)</label>
-                  
-                  <select name="position" value={form.position} onChange={hdlOnChange} className="border w-full p-1 border-gray-400 rounded-md">
+
+                  <select name="position" value={form.position} onChange={(e) => { setForm({ ...form, position: e.target.value }) }} className="border w-full p-1 border-gray-400 rounded-md">
                     <option value="Manager">Manager</option>
                     <option value="Staff">Staff</option>
                     <option value="Rider">Rider</option>
@@ -243,12 +236,12 @@ const EditEmployee = () => {
 
             <div className="p-2 mt-9 flex items-center justify-center gap-8">
               <button className="bg-blue-500 px-16 py-3 text-white hover:bg-blue-700 rounded-md cursor-pointer"
-              type="submit">
+                type="submit">
                 Edit
               </button>
 
               <button className="bg-red-500 px-16 py-3 text-white hover:bg-red-700 rounded-md cursor-pointer"
-              type="button" onClick={()=> navigate('/employee/listEmployee')}>
+                type="button" onClick={() => navigate('/employee/listEmployee')}>
                 Back
               </button>
             </div>

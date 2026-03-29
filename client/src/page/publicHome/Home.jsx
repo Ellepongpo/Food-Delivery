@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Hamburger, Pizza, CupSoda } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import home1 from '../../assets/home1.jpg'
 import home2 from '../../assets/home2.jpg'
 import home3 from '../../assets/home3.jpg'

@@ -61,14 +61,6 @@ const AddProduct = () => {
         }
     }
 
-    //set form
-    const hdlOnChange = (e) => {
-        setForm({
-            ...form, [e.target.name]: e.target.value
-        })
-        //console.log("form : ", form)
-    }
-
     //select accesoories
     const hdlSelectAccessories = (e) => {
         const value = e.target.value;
@@ -137,12 +129,15 @@ const AddProduct = () => {
                                 type="text"
                                 name='product_name'
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e) => { setForm({ ...form, product_name: e.target.value }) }}
                             />
                         </div>
                         <div>
                             <label className='block text-sm font-medium text-gray-700'>Product Description</label>
-                            <textarea className='border border-gray-300 rounded-md p-1 w-full' name="description" onChange={hdlOnChange}></textarea>
+                            <textarea className='border border-gray-300 rounded-md p-1 w-full'
+                                name="description"
+                                onChange={(e) => { setForm({ ...form, description: e.target.value }) }}>
+                            </textarea>
                         </div>
 
                         <div>
@@ -151,7 +146,7 @@ const AddProduct = () => {
                                 type="number"
                                 name='product_price'
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e) => { setForm({ ...form, product_price: e.target.value }) }}
                             />
                         </div>
 
@@ -161,7 +156,7 @@ const AddProduct = () => {
                                 type="number"
                                 name='stock_qty_product'
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e) => { setForm({ ...form, stock_qty_product: e.target.value }) }}
                             />
                         </div>
 
@@ -177,7 +172,7 @@ const AddProduct = () => {
 
                         <div>
                             <label className='block text-sm font-medium text-gray-700'>Categoey</label>
-                            <select name="category_id" className='border w-full border-gray-300 rounded-md p-1' required onChange={hdlOnChange}>
+                            <select name="category_id" className='border w-full border-gray-300 rounded-md p-1' required onChange={(e) => { setForm({ ...form, category_id: e.target.value }) }}>
                                 <option value="">--- select category ---</option>
                                 {
                                     category.map((item) => (
@@ -207,10 +202,24 @@ const AddProduct = () => {
                             <span className="block text-sm font-medium text-gray-700">Status</span>
                             <div className="flex items-center gap-6 mt-2">
                                 <label className="inline-flex items-center gap-2">
-                                    <input name="status" type="radio" value="IsActive" onChange={hdlOnChange} required /><span>IsActive</span>
+                                    <input
+                                        name="status"
+                                        type="radio"
+                                        value="IsActive"
+                                        onChange={(e) => { setForm({ ...form, status: e.target.value }) }}
+                                        required
+                                    />
+                                    <span>IsActive</span>
                                 </label>
                                 <label className="inline-flex items-center gap-2">
-                                    <input name="status" type="radio" value="InActive" onChange={hdlOnChange} required /><span>InActive</span>
+                                    <input
+                                        name="status"
+                                        type="radio"
+                                        value="InActive"
+                                        onChange={(e)=> {setForm({...form, status: e.target.value})}}
+                                        required
+                                    />
+                                    <span>InActive</span>
                                 </label>
                             </div>
                         </div>
@@ -231,16 +240,14 @@ const AddProduct = () => {
 
                         <div className="flex">
                             <button className="w-full border-blue-500 bg-blue-500 m-4 p-2 rounded-md
-                             text-white hover:bg-blue-700 cursor-pointer"
-                            >
+                             text-white hover:bg-blue-700 cursor-pointer">
                                 Add
                             </button>
 
                             <button className="w-full border-red-500 bg-red-500 m-4 p-2 rounded-md
                              text-white hover:bg-red-700 cursor-pointer"
                                 type="button"
-                                onClick={() => navigate('/employee/product')}
-                            >
+                                onClick={() => navigate('/employee/product')}>
                                 Back
                             </button>
                         </div>

@@ -26,7 +26,7 @@ const EditProfile = () => {
   })
 
   useEffect(() => {
-    
+
     setForm({
       customer_id: customer.id,
       first_name: customer.first_name,
@@ -44,11 +44,6 @@ const EditProfile = () => {
     })
   }, [customer])
 
-  const hdlOnChange = (e) => {
-    setForm({
-      ...form, [e.target.name]: e.target.value
-    })
-  }
 
   const hdlSubmit = async (e) => {
     e.preventDefault()
@@ -85,7 +80,7 @@ const EditProfile = () => {
                 name="first_name"
                 type="text"
                 value={form.first_name}
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, first_name: e.target.value }) }}
               />
             </div>
 
@@ -95,7 +90,7 @@ const EditProfile = () => {
                 name="last_name"
                 type="text"
                 value={form.last_name}
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, last_name: e.target.value }) }}
               />
             </div>
           </div>
@@ -117,7 +112,7 @@ const EditProfile = () => {
                 name="email"
                 type="email"
                 value={form.email}
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, email: e.target.value }) }}
               />
             </div>
           </div>
@@ -130,7 +125,7 @@ const EditProfile = () => {
                 name="password"
                 value={form.password}
                 type="text"
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, password: e.target.value }) }}
               />
             </div>
 
@@ -140,7 +135,7 @@ const EditProfile = () => {
                 name="phone"
                 type="text"
                 value={form.phone}
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, phone: e.target.value }) }}
               />
             </div>
           </div>
@@ -153,7 +148,7 @@ const EditProfile = () => {
                 name="house_no"
                 value={form.house_no}
                 type="text"
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, house_no: e.target.value }) }}
               />
             </div>
 
@@ -163,7 +158,7 @@ const EditProfile = () => {
                 name="sub_district"
                 type="text"
                 value={form.sub_district}
-                onChange={hdlOnChange}
+                onChange={(e)=> { setForm({...form, sub_district: e.target.value})}}
               />
             </div>
           </div>
@@ -176,7 +171,7 @@ const EditProfile = () => {
                 name="district"
                 value={form.district}
                 type="text"
-                onChange={hdlOnChange}
+                onChange={(e)=> {setForm({...form, district: e.target.value})}}
               />
             </div>
 
@@ -186,7 +181,7 @@ const EditProfile = () => {
                 name="province"
                 type="text"
                 value={form.province}
-                onChange={hdlOnChange}
+                onChange={(e)=> {setForm({...form, province: e.target.value})}}
               />
             </div>
           </div>
@@ -200,7 +195,7 @@ const EditProfile = () => {
                 name="zip_code"
                 value={form.zip_code}
                 type="text"
-                onChange={hdlOnChange}
+                onChange={(e)=> { setForm({...form, zip_code: e.target.value})}}
               />
             </div>
 

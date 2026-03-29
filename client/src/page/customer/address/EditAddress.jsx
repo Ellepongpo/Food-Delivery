@@ -31,11 +31,6 @@ const EditAddress = () => {
     })
   }, [address])
 
-  const hdlOnChange = (e) => {
-    setForm({
-      ...form, [e.target.name]: e.target.value
-    })
-  }
 
   const hdlOnSubmit = async (e) => {
     e.preventDefault()
@@ -68,7 +63,7 @@ const EditAddress = () => {
                 type="text"
                 name="house_no"
                 value={form.house_no}
-                onChange={hdlOnChange}
+                onChange={(e)=> {setForm({...form, house_no: e.target.value})}}
               />
             </div>
 
@@ -78,7 +73,7 @@ const EditAddress = () => {
                 type="text"
                 name="sub_district"
                 value={form.sub_district}
-                onChange={hdlOnChange}
+                onChange={(e)=> { setForm({...form, sub_district: e.target.value})}}
               />
             </div>
 
@@ -88,7 +83,7 @@ const EditAddress = () => {
                 type="text"
                 name="district"
                 value={form.district}
-                onChange={hdlOnChange}
+                onChange={(e)=> { setForm({...form, district: e.target.value})}}
               />
             </div>
 
@@ -98,7 +93,7 @@ const EditAddress = () => {
                 type="text"
                 name="province"
                 value={form.province}
-                onChange={hdlOnChange}
+                onChange={(e)=> { setForm({...form, province: e.target.value})}}
               />
             </div>
 
@@ -108,7 +103,7 @@ const EditAddress = () => {
                 type="text"
                 name="zip_code"
                 value={form.zip_code}
-                onChange={hdlOnChange}
+                onChange={(e)=> { setForm({...form, zip_code: e.target.value})}}
               />
             </div>
 
@@ -118,7 +113,7 @@ const EditAddress = () => {
                 type="text"
                 name="phone"
                 value={form.phone}
-                onChange={hdlOnChange}
+                onChange={(e)=> { setForm({...form, phone: e.target.value})}}
               />
             </div>
 

@@ -7,36 +7,31 @@ import useEmployeeStore from "../../../store/Employee-store"
 const EditAccessories = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const employee_id = useEmployeeStore((state)=> state.employee.id)
+  const employee_id = useEmployeeStore((state) => state.employee.id)
   const accessories = location?.state?.accessories
-  const [form , setForm] = useState({
+  const [form, setForm] = useState({
     accessories_name: "",
     accessories_price: "",
     stock_qty_accessories: "",
-    employee_id:""
+    employee_id: ""
   })
 
-  useEffect(()=> {
+  useEffect(() => {
     setForm({
       accessories_name: accessories.accessories_name,
       accessories_price: accessories.accessories_price,
       stock_qty_accessories: accessories.stock_qty_accessories,
       employee_id: employee_id
     })
-  },[accessories])
+  }, [accessories])
 
-  const hdlOnChange = (e)=> {
-    setForm({
-      ...form , [e.target.name]: e.target.value
-    })
-  }
 
   const hdlOnSubmit = async (e) => {
     e.preventDefault()
-    try{
+    try {
       const res = await axios.post('http://localhost:3000/api/editAccessories', form)
       toast.success(res.data.message)
-    }catch(err){
+    } catch (err) {
       console.log(err)
       toast.error(err.response?.data?.message)
     }
@@ -73,7 +68,7 @@ const EditAccessories = () => {
                 type="text"
                 name="accessories_price"
                 value={form.accessories_price}
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, accessories_price: e.target.value }) }}
               />
             </div>
 
@@ -83,29 +78,25 @@ const EditAccessories = () => {
                 type="text"
                 name="stock_qty_accessories"
                 value={form.stock_qty_accessories}
-                onChange={hdlOnChange}
+                onChange={(e) => { setForm({ ...form, stock_qty_accessories: e.target.value }) }}
               />
             </div>
 
             <div className="flex mt-8">
               <button className="w-full border-blue-500 bg-blue-500 m-4 p-2 rounded-md
-                             text-white hover:bg-blue-700 cursor-pointer"
-              >
+               text-white hover:bg-blue-700 cursor-pointer">
                 Edit
               </button>
 
-              <button className="w-full border-red-500 bg-red-500 m-4 p-2 rounded-md
-                             text-white hover:bg-red-700 cursor-pointer"
+              <button className="w-full border-red-500 bg-red-500 m-4 p-2 rounded-md text-white hover:bg-red-700 cursor-pointer"
                 type="button"
-                onClick={() => navigate('/employee/accessories')}
-              >
+                onClick={() => navigate('/employee/accessories')}>
                 Back
               </button>
             </div>
 
-
-
           </form>
+          
         </div>
       </div>
     </div>

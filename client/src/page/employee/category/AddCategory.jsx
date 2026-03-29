@@ -14,14 +14,6 @@ const AddCategory = () => {
         status: ""
     })
 
-    const hdlOnChange = (e) => {
-        //console.log(e)
-        setForm({
-            ...form, [e.target.name]: e.target.value
-        })
-        //console.log(form)
-    }
-
     const handleImageChange = (e) => {
         //console.log(e)
         const file = e.target.files[0]
@@ -74,7 +66,7 @@ const AddCategory = () => {
                                 type='text'
                                 name='category_name'
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e) => { setForm({ ...form, category_name: e.target.value }) }}
                             />
                         </div>
 
@@ -92,10 +84,24 @@ const AddCategory = () => {
                             <span className='block text-sm font-medium text-gray-700'>Status</span>
                             <div className='flex items-center gap-6 mt-2'>
                                 <label className='inline-flex items-center gap-2'>
-                                    <input name='status' type="radio" value="IsActive" onChange={hdlOnChange} required /><span>IsActive</span>
+                                    <input
+                                        name='status'
+                                        type="radio"
+                                        value="IsActive"
+                                        onChange={(e) => { setForm({ ...form, status: e.target.value }) }}
+                                        required
+                                    />
+                                    <span>IsActive</span>
                                 </label>
                                 <label className='inline-flex items-center gap-2'>
-                                    <input name='status' type="radio" value="InActive" onChange={hdlOnChange} required /><span>InActive</span>
+                                    <input
+                                        name='status'
+                                        type="radio"
+                                        value="InActive"
+                                        onChange={(e) => { setForm({ ...form, status: e.target.value }) }}
+                                        required
+                                    />
+                                    <span>InActive</span>
                                 </label>
                             </div>
                         </div>
@@ -114,16 +120,14 @@ const AddCategory = () => {
 
                         <div className="flex">
                             <button className="w-full border-blue-500 bg-blue-500 m-4 p-2 rounded-md
-                             text-white hover:bg-blue-700 cursor-pointer"
-                            >
+                             text-white hover:bg-blue-700 cursor-pointer">
                                 Add
                             </button>
 
                             <button className="w-full border-red-500 bg-red-500 m-4 p-2 rounded-md
                              text-white hover:bg-red-700 cursor-pointer"
                                 type="button"
-                                onClick={() => navigate('/employee/category')}
-                            >
+                                onClick={() => navigate('/employee/category')}>
                                 Back
                             </button>
                         </div>

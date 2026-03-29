@@ -17,14 +17,6 @@ const AddAddress = () => {
         customer_id: customer.id
     })
 
-    const hdlOnChange = (e) => {
-        setForm({
-            ...form, [e.target.name]: e.target.value
-        })
-        //console.log(form)
-
-    }
-
     const hdlSubmit = async (e) => {
         e.preventDefault()
 
@@ -56,7 +48,7 @@ const AddAddress = () => {
                                 type="text"
                                 name="house_no"
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e)=> {setForm({...form, house_no: e.target.value})}}
                             />
                         </div>
 
@@ -66,7 +58,7 @@ const AddAddress = () => {
                                 type="text"
                                 name="sub_district"
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e)=> {setForm({...form, sub_district: e.target.value})}}
                             />
                         </div>
 
@@ -76,7 +68,7 @@ const AddAddress = () => {
                                 type="text"
                                 name="district"
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e)=> { setForm({...form, district: e.target.value})}}
                             />
                         </div>
 
@@ -86,7 +78,7 @@ const AddAddress = () => {
                                 type="text"
                                 name="province"
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e)=> { setForm({...form, province: e.target.value})}}
                             />
                         </div>
 
@@ -96,7 +88,7 @@ const AddAddress = () => {
                                 type="text"
                                 name="zip_code"
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e)=> { setForm({...form, zip_code: e.target.value})}}
                             />
                         </div>
 
@@ -106,7 +98,7 @@ const AddAddress = () => {
                                 type="text"
                                 name="phone"
                                 required
-                                onChange={hdlOnChange}
+                                onChange={(e)=> {setForm({...form, phone: e.target.value})}}
                             />
                         </div>
 
